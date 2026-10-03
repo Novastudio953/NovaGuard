@@ -39,6 +39,15 @@ class NovaGuard : JavaPlugin() {
     var bedrockLeniency: Boolean = true
     var bedrockExempt: Set<String> = emptySet()
 
+    /** Grace period for brand-new players. */
+    var graceEnabled: Boolean = true
+    var graceMinutes: Long = 60
+    var graceMultiplier: Double = 2.0
+
+    /** Lag shield: pause punishments when TPS collapses. */
+    var lagShieldEnabled: Boolean = true
+    var lagShieldThreshold: Double = 18.0
+
     override fun onEnable() {
         saveDefaultConfig()
         com.novaguard.support.BedrockSupport.init(this)

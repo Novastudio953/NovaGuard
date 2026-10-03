@@ -25,18 +25,19 @@ abstract class Check(
     fun flag(player: Player, data: PlayerData, info: String = "") {
         if (!enabled) return
         if (data.isExempt(player)) return
-        // Bedrock (Geyser) leniency: these checks can't work reliably
-        // through the Bedrock->Java translation layer
         if (plugin.bedrockLeniency && data.checkBedrock() && plugin.bedrockExempt.contains(id)) return
         val vl = data.addVl(id, vlAmount())
-        data.addHistory(id, vl, info)
-        plugin.alerts.alert(player, this, vl, info)
-        if (vl >= maxVl * banVlMultiplier) {
+        val inGrace = plugin.graceEnabled && System.currentTimeMillis() < data.graceUntil
+        data.addHistory(id, vl, if (inGrace) "$info [grace]" else info)
+        plugin.alerts.alert(player, this, vl, if (inGrace) "$info [grace]" else info)
+        // grace period: brand-new players need 2x VL before punishment
+        val effectiveMax = if (inGrace) maxVl * plugin.graceMultiplier else maxVl
+        if (vl >= effectiveMax * banVlMultiplier) {
             plugin.punishments.execute(player, this, banCommand, vl, true)
             data.resetVl(id)
-        } else if (vl >= maxVl) {
+        } else if (vl >= effectiveMax) {
             plugin.punishments.execute(player, this, punishment, vl, false)
-            data.setVl(id, maxVl * 0.5) // keep half so repeat offenders escalate
+            data.setVl(id, effectiveMax * 0.5) // keep half so repeat offenders escalate
         }
     }
 

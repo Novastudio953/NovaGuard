@@ -44,6 +44,10 @@ class PlayerListener(private val plugin: NovaGuard) : Listener {
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
         val d = plugin.data.get(e.player.uniqueId) // ensure entry
+        // grace period for brand-new players
+        if (!e.player.hasPlayedBefore()) {
+            d.graceUntil = System.currentTimeMillis() + plugin.graceMinutes * 60_000L
+        }
         // warm the Bedrock cache early so first checks don't pay lookup cost
         plugin.server.scheduler.runTaskLaterAsynchronously(plugin, Runnable {
             d.checkBedrock()

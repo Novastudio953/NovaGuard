@@ -45,5 +45,8 @@ class CheckManager(private val plugin: NovaGuard) {
         plugin.bedrockLeniency = plugin.config.getBoolean("bedrock.enabled", true)
         plugin.bedrockExempt = plugin.config.getStringList("bedrock.exempt-checks")
             .map { it.lowercase() }.toSet()
+        plugin.graceEnabled = plugin.config.getBoolean("settings.grace-period.enabled", true)
+        plugin.graceMinutes = plugin.config.getLong("settings.grace-period.minutes", 60)
+        plugin.graceMultiplier = plugin.config.getDouble("settings.grace-period.vl-multiplier", 2.0)
     }
 }

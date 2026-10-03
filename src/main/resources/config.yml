@@ -26,6 +26,15 @@ settings:
   vpn-block:
     enabled: true
     exempt-ips: []
+  # grace period: brand-new players need 2x VL before any punishment
+  grace-period:
+    enabled: true
+    minutes: 60
+    vl-multiplier: 2.0
+  # lag shield: pause all punishments while server TPS is below threshold
+  lag-shield:
+    enabled: true
+    tps-threshold: 18.0
 
 # ============================================================
 # Bedrock (Geyser/Floodgate) leniency

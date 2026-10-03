@@ -16,6 +16,8 @@ class PunishmentManager(private val plugin: NovaGuard) {
     fun load() {
         cooldownSeconds = plugin.config.getLong("settings.punishment-cooldown-seconds", 30)
         broadcastPunishments = plugin.config.getBoolean("settings.broadcast-punishments", true)
+        plugin.lagShieldEnabled = plugin.config.getBoolean("settings.lag-shield.enabled", true)
+        plugin.lagShieldThreshold = plugin.config.getDouble("settings.lag-shield.tps-threshold", 18.0)
     }
 
     fun execute(player: Player, check: Check, template: String, vl: Double, isBan: Boolean = false) {
@@ -23,6 +25,15 @@ class PunishmentManager(private val plugin: NovaGuard) {
         val now = System.currentTimeMillis()
         if (now - (cooldowns[key] ?: 0L) < cooldownSeconds * 1000) return
         cooldowns[key] = now
+
+        // lag shield: never punish while the server itself is lagging
+        if (plugin.lagShieldEnabled) {
+            val tps = try { Bukkit.getTPS()[0] } catch (_: Exception) { 20.0 }
+            if (tps < plugin.lagShieldThreshold) {
+                plugin.logger.info("[LAG-SHIELD] Punishment for ${player.name} (${check.displayName}) skipped — TPS ${"%.1f".format(tps)}")
+                return
+            }
+        }
 
         // ban-wave mode: defer bans into the wave list instead of banning now
         if (isBan && plugin.config.getBoolean("settings.ban-wave-mode", false)) {
