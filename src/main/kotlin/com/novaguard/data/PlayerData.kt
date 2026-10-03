@@ -22,6 +22,17 @@ class PlayerData(val uuid: UUID) {
     @Volatile var inventoryOpen: Boolean = false
     @Volatile var alertsEnabled: Boolean = true
     @Volatile var frozen: Boolean = false
+    @Volatile private var bedrockChecked: Boolean = false
+    @Volatile var isBedrock: Boolean = false
+
+    /** Lazy Bedrock detection (cached after first lookup). */
+    fun checkBedrock(): Boolean {
+        if (!bedrockChecked) {
+            isBedrock = com.novaguard.support.BedrockSupport.isBedrockPlayer(uuid)
+            bedrockChecked = true
+        }
+        return isBedrock
+    }
 
     private val history = mutableListOf<ViolationRecord>()
 

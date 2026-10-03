@@ -23,6 +23,33 @@ settings:
   # how often (seconds) inventories are scanned for illegal items
   illegal-scan-seconds: 60
 
+# ============================================================
+# Bedrock (Geyser/Floodgate) leniency
+# Bedrock movement translates differently through Geyser, so the
+# checks below are SKIPPED for Bedrock players instead of
+# false-banning them. Combat/block/exploit checks still apply.
+# No hard dependency: works with or without Floodgate installed.
+# ============================================================
+bedrock:
+  enabled: true
+  exempt-checks:
+    - fly
+    - speed
+    - timer
+    - jesus
+    - step
+    - spider
+    - scaffold
+    - phase
+    - elytra
+    - boatfly
+    - noslow
+    - sprintcheck
+    - derp
+    - baritone
+    - reach
+    - killaura-angle
+
 # Per-check settings. enabled = toggle, max-vl = violations before
 # punishment, punishment = command at max-vl, ban-command = command
 # at max-vl * ban-vl-multiplier. {player} {check} {vl} are replaced.

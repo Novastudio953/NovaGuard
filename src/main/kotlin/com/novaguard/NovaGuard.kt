@@ -31,8 +31,13 @@ class NovaGuard : JavaPlugin() {
     lateinit var staff: StaffTools
         private set
 
+    /** Bedrock (Geyser) leniency state, loaded from config. */
+    var bedrockLeniency: Boolean = true
+    var bedrockExempt: Set<String> = emptySet()
+
     override fun onEnable() {
         saveDefaultConfig()
+        com.novaguard.support.BedrockSupport.init(this)
         data = DataManager()
         xray = XrayManager(this)          // before CheckManager (registers xray check)
         checks = CheckManager(this)

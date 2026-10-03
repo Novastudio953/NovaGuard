@@ -28,7 +28,11 @@ class PlayerListener(private val plugin: NovaGuard) : Listener {
 
     @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
-        plugin.data.get(e.player.uniqueId) // ensure entry
+        val d = plugin.data.get(e.player.uniqueId) // ensure entry
+        // warm the Bedrock cache early so first checks don't pay lookup cost
+        plugin.server.scheduler.runTaskLaterAsynchronously(plugin, Runnable {
+            d.checkBedrock()
+        }, 40L)
     }
 
     @EventHandler

@@ -25,6 +25,9 @@ abstract class Check(
     fun flag(player: Player, data: PlayerData, info: String = "") {
         if (!enabled) return
         if (data.isExempt(player)) return
+        // Bedrock (Geyser) leniency: these checks can't work reliably
+        // through the Bedrock->Java translation layer
+        if (plugin.bedrockLeniency && data.checkBedrock() && plugin.bedrockExempt.contains(id)) return
         val vl = data.addVl(id, vlAmount())
         data.addHistory(id, vl, info)
         plugin.alerts.alert(player, this, vl, info)

@@ -40,5 +40,8 @@ class CheckManager(private val plugin: NovaGuard) {
             check.banCommand = plugin.config.getString("$path.ban-command", check.banCommand)!!
             check.banVlMultiplier = plugin.config.getDouble("$path.ban-vl-multiplier", 3.0)
         }
+        plugin.bedrockLeniency = plugin.config.getBoolean("bedrock.enabled", true)
+        plugin.bedrockExempt = plugin.config.getStringList("bedrock.exempt-checks")
+            .map { it.lowercase() }.toSet()
     }
 }
