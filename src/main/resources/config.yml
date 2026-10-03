@@ -1,0 +1,167 @@
+# ============================================================
+# NovaGuard v1.0.0 — original anti-cheat by Joel (MIT)
+# Every check can be toggled, tuned, and given its own punishment,
+# just like the big premium anti-cheats.
+# ============================================================
+
+settings:
+  alerts-enabled: true
+  alert-format: "&8[&cNovaGuard&8] &f{player} &7failed &c{check} &8(VL: {vl})"
+  log-to-console: true
+  broadcast-punishments: true
+  punishment-broadcast: "&8[&cNovaGuard&8] &f{player} &7was punished for &c{check}"
+  # seconds before the same player can be punished again for the same check
+  punishment-cooldown-seconds: 30
+  # VL lost per minute for every check (forgiveness over time)
+  vl-decay-per-minute: 1.0
+  # players above this ping skip movement checks (lag compensation)
+  lag-compensation-max-ping: 350
+
+# Per-check settings. enabled = toggle, max-vl = violations before
+# punishment, punishment = command at max-vl, ban-command = command
+# at max-vl * ban-vl-multiplier. {player} {check} {vl} are replaced.
+checks:
+  fly:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (Fly)"
+    ban-command: "ban {player} Cheating (Fly)"
+    ban-vl-multiplier: 3.0
+  speed:
+    enabled: true
+    max-vl: 10.0
+    punishment: "kick {player} Unfair advantage (Speed)"
+    ban-command: "ban {player} Cheating (Speed)"
+    ban-vl-multiplier: 3.0
+  timer:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (Timer)"
+    ban-command: "ban {player} Cheating (Timer)"
+    ban-vl-multiplier: 3.0
+  jesus:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (Jesus)"
+    ban-command: "ban {player} Cheating (Jesus)"
+    ban-vl-multiplier: 3.0
+  step:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (Step)"
+    ban-command: "ban {player} Cheating (Step)"
+    ban-vl-multiplier: 3.0
+  nofall:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (NoFall)"
+    ban-command: "ban {player} Cheating (NoFall)"
+    ban-vl-multiplier: 3.0
+  spider:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (Spider)"
+    ban-command: "ban {player} Cheating (Spider)"
+    ban-vl-multiplier: 3.0
+  scaffold:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (Scaffold)"
+    ban-command: "ban {player} Cheating (Scaffold)"
+    ban-vl-multiplier: 3.0
+  phase:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (Phase)"
+    ban-command: "ban {player} Cheating (Phase)"
+    ban-vl-multiplier: 3.0
+  elytra:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (ElytraFly)"
+    ban-command: "ban {player} Cheating (ElytraFly)"
+    ban-vl-multiplier: 3.0
+  killaura-rate:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (KillAura)"
+    ban-command: "ban {player} Cheating (KillAura)"
+    ban-vl-multiplier: 3.0
+  killaura-angle:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (KillAura)"
+    ban-command: "ban {player} Cheating (KillAura)"
+    ban-vl-multiplier: 3.0
+  killaura-cooldown:
+    enabled: true
+    max-vl: 10.0
+    punishment: "kick {player} Unfair advantage (KillAura)"
+    ban-command: "ban {player} Cheating (KillAura)"
+    ban-vl-multiplier: 3.0
+  reach:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (Reach)"
+    ban-command: "ban {player} Cheating (Reach)"
+    ban-vl-multiplier: 3.0
+  autoclicker:
+    enabled: true
+    max-vl: 5.0
+    punishment: "kick {player} Unfair advantage (AutoClicker)"
+    ban-command: "ban {player} Cheating (AutoClicker)"
+    ban-vl-multiplier: 3.0
+  criticals:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (Criticals)"
+    ban-command: "ban {player} Cheating (Criticals)"
+    ban-vl-multiplier: 3.0
+  velocity:
+    enabled: true
+    max-vl: 10.0
+    punishment: "kick {player} Unfair advantage (Velocity)"
+    ban-command: "ban {player} Cheating (Velocity)"
+    ban-vl-multiplier: 3.0
+  fastplace:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (FastPlace)"
+    ban-command: "ban {player} Cheating (FastPlace)"
+    ban-vl-multiplier: 3.0
+  fastbreak:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (FastBreak)"
+    ban-command: "ban {player} Cheating (FastBreak)"
+    ban-vl-multiplier: 3.0
+  nuker:
+    enabled: true
+    max-vl: 5.0
+    punishment: "kick {player} Unfair advantage (Nuker)"
+    ban-command: "ban {player} Cheating (Nuker)"
+    ban-vl-multiplier: 3.0
+  fasteat:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (FastEat)"
+    ban-command: "ban {player} Cheating (FastEat)"
+    ban-vl-multiplier: 3.0
+  badpackets:
+    enabled: true
+    max-vl: 4.0
+    punishment: "kick {player} Unfair advantage (BadPackets)"
+    ban-command: "ban {player} Cheating (BadPackets)"
+    ban-vl-multiplier: 3.0
+  inventory:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (InventoryMove)"
+    ban-command: "ban {player} Cheating (InventoryMove)"
+    ban-vl-multiplier: 3.0
+  pingspoof:
+    enabled: true
+    max-vl: 4.0
+    punishment: "kick {player} Unfair advantage (PingSpoof)"
+    ban-command: "ban {player} Cheating (PingSpoof)"
+    ban-vl-multiplier: 3.0

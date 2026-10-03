@@ -1,0 +1,23 @@
+name: NovaGuard
+version: 1.0.0
+main: com.novaguard.NovaGuard
+api-version: '1.21'
+author: Joel
+description: Original lightweight anti-cheat with 24 toggleable checks.
+website: https://github.com/reach1234889
+commands:
+  novaguard:
+    description: NovaGuard admin command
+    usage: /novaguard <reload|list|toggle|vl|vlreset|alerts>
+    aliases: [ng, guard]
+    permission: novaguard.admin
+permissions:
+  novaguard.admin:
+    description: Full NovaGuard admin access
+    default: op
+  novaguard.alerts:
+    description: Receive NovaGuard violation alerts
+    default: op
+  novaguard.bypass:
+    description: Exempt from all NovaGuard checks
+    default: op
