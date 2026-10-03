@@ -4,10 +4,11 @@ import com.novaguard.NovaGuard
 import com.novaguard.data.ViolationRecord
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import java.net.URI
 import java.net.http.HttpClient
@@ -24,15 +25,19 @@ class StaffTools(private val plugin: NovaGuard) {
     val reports = mutableListOf<Report>()
     val waveList = mutableSetOf<UUID>()
 
+    private fun msg(key: String, vararg vars: Pair<String, String>) =
+        plugin.configs.msg(key, *vars)
+
     // ---------- /report ----------
     fun fileReport(reporter: Player, targetName: String, reason: String) {
         reports.add(Report(reporter.name, targetName, reason, System.currentTimeMillis()))
         if (reports.size > 100) reports.removeAt(0)
-        val msg = "§8[§cNovaGuard§8] §f${reporter.name} §7reported §f$targetName§8: §7$reason"
+        val notify = msg("report-notify", "reporter" to reporter.name,
+            "target" to targetName, "reason" to reason)
         for (s in Bukkit.getOnlinePlayers()) {
-            if (s.hasPermission("novaguard.admin")) s.sendMessage(msg)
+            if (s.hasPermission("novaguard.admin")) s.sendMessage(notify)
         }
-        reporter.sendMessage("§aReport filed. Staff have been notified.")
+        reporter.sendMessage(msg("report-filed"))
     }
 
     // ---------- freeze ----------
@@ -40,81 +45,123 @@ class StaffTools(private val plugin: NovaGuard) {
         val d = plugin.data.get(target.uniqueId)
         d.frozen = !d.frozen
         if (d.frozen) {
-            target.sendMessage("§cYou have been frozen by staff. Do not move or log out.")
-            staff.sendMessage("§7Froze §f${target.name}§7.")
+            target.sendMessage(msg("freeze-target-frozen"))
+            staff.sendMessage(msg("freeze-staff-frozen", "player" to target.name))
         } else {
-            target.sendMessage("§aYou have been unfrozen.")
-            staff.sendMessage("§7Unfroze §f${target.name}§7.")
+            target.sendMessage(msg("freeze-target-unfrozen"))
+            staff.sendMessage(msg("freeze-staff-unfrozen", "player" to target.name))
         }
         return d.frozen
     }
 
     // ---------- ban wave ----------
-    fun banWave(sender: org.bukkit.command.CommandSender): Int {
+    fun banWave(sender: CommandSender): Int {
         var count = 0
         for (uuid in waveList.toList()) {
             val p = Bukkit.getPlayer(uuid)
             val name = p?.name ?: Bukkit.getOfflinePlayer(uuid).name ?: uuid.toString()
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban $name Cheating (NovaGuard ban wave)")
-            p?.kickPlayer("§cBanned by NovaGuard ban wave.")
+            p?.kickPlayer(msg("wave-kick"))
             count++
         }
         waveList.clear()
-        sender.sendMessage("§8[§cNovaGuard§8] §7Ban wave executed: §c$count §7players banned.")
-        DiscordHook.send(plugin, "🌊 **Ban wave executed:** $count players banned.")
+        sender.sendMessage(msg("wave-executed", "count" to count.toString()))
+        DiscordHook.send(plugin, msg("wave-discord", "count" to count.toString())
+            .replace("§", "").replace(Regex("&[0-9a-fk-or]"), ""))
         return count
     }
+
+    // ---------- GUI helpers ----------
+    private fun border(inv: org.bukkit.inventory.Inventory) {
+        val pane = ItemStack(Material.BLACK_STAINED_GLASS_PANE)
+        val meta = pane.itemMeta
+        meta.displayName(Component.text(" "))
+        pane.itemMeta = meta
+        for (i in 0 until 9) inv.setItem(i, pane)
+        for (i in inv.size - 9 until inv.size) inv.setItem(i, pane)
+    }
+
+    private fun title(text: String) = "§8🛡 NovaGuard §8| §f$text"
 
     // ---------- history GUI ----------
     fun openHistory(staff: Player, target: Player) {
         val history: List<ViolationRecord> = plugin.data.get(target.uniqueId).historySnapshot()
-        val inv = Bukkit.createInventory(null, 54, "§8NG History: ${target.name}")
-        val sorted = history.sortedByDescending { it.time }.take(45)
+        val inv = Bukkit.createInventory(null, 54, title("Violation History"))
+        border(inv)
+        val sorted = history.sortedByDescending { it.time }.take(36)
         for ((i, rec) in sorted.withIndex()) {
             val item = ItemStack(Material.PAPER)
             val meta = item.itemMeta
-            meta.displayName(Component.text(rec.checkId, NamedTextColor.RED))
+            meta.displayName(Component.text(rec.checkId, NamedTextColor.RED, TextDecoration.BOLD))
             val age = (System.currentTimeMillis() - rec.time) / 1000
+            val ago = when {
+                age < 60 -> "${age}s ago"
+                age < 3600 -> "${age / 60}m ago"
+                else -> "${age / 3600}h ago"
+            }
             meta.lore(listOf(
-                Component.text("VL: ${"%.1f".format(rec.vl)}", NamedTextColor.YELLOW),
-                Component.text("${age}s ago", NamedTextColor.GRAY),
-                Component.text(rec.info.take(40), NamedTextColor.DARK_GRAY)
+                Component.text("Severity  ", NamedTextColor.GRAY)
+                    .append(Component.text("%.1f VL".format(rec.vl), NamedTextColor.YELLOW)),
+                Component.text("When  ", NamedTextColor.GRAY)
+                    .append(Component.text(ago, NamedTextColor.GRAY)),
+                Component.text(rec.info.take(42), NamedTextColor.DARK_GRAY)
             ))
             item.itemMeta = meta
-            inv.setItem(i, item)
+            inv.setItem(9 + i, item)
         }
-        // summary
-        val total = ItemStack(Material.BOOK)
+        // summary diamond
+        val total = ItemStack(Material.DIAMOND)
         val tm = total.itemMeta
-        tm.displayName(Component.text("Total VL", NamedTextColor.GOLD))
+        tm.displayName(Component.text(target.name, NamedTextColor.AQUA, TextDecoration.BOLD))
         val totalVl = plugin.checks.all.sumOf { plugin.data.get(target.uniqueId).getVl(it.id) }
-        tm.lore(listOf(Component.text("%.1f".format(totalVl), NamedTextColor.YELLOW)))
+        val active = plugin.checks.all.count { plugin.data.get(target.uniqueId).getVl(it.id) > 0 }
+        tm.lore(listOf(
+            Component.text("Total VL  ", NamedTextColor.GRAY)
+                .append(Component.text("%.1f".format(totalVl), NamedTextColor.YELLOW)),
+            Component.text("Flagged checks  ", NamedTextColor.GRAY)
+                .append(Component.text("$active", NamedTextColor.YELLOW)),
+            Component.text("Records  ", NamedTextColor.GRAY)
+                .append(Component.text("${history.size}", NamedTextColor.YELLOW))
+        ))
         total.itemMeta = tm
-        inv.setItem(53, total)
+        inv.setItem(49, total)
         staff.openInventory(inv)
     }
 
     // ---------- reports GUI ----------
     fun openReports(staff: Player) {
-        val inv = Bukkit.createInventory(null, 54, "§8NG Reports")
-        for ((i, rep) in reports.take(45).withIndex()) {
-            val item = ItemStack(Material.SKELETON_SKULL)
-            val meta = item.itemMeta
-            meta.displayName(Component.text(rep.target, NamedTextColor.RED))
+        val inv = Bukkit.createInventory(null, 54, title("Player Reports"))
+        border(inv)
+        for ((i, rep) in reports.take(36).withIndex()) {
+            val item = ItemStack(Material.PLAYER_HEAD)
+            val meta = item.itemMeta as org.bukkit.inventory.meta.SkullMeta
+            meta.displayName(Component.text(rep.target, NamedTextColor.RED, TextDecoration.BOLD))
+            val age = (System.currentTimeMillis() - rep.time) / 1000
             meta.lore(listOf(
-                Component.text("By: ${rep.reporter}", NamedTextColor.GRAY),
-                Component.text(rep.reason.take(40), NamedTextColor.WHITE),
-                Component.text("Click to teleport", NamedTextColor.GREEN)
+                Component.text("Reported by  ", NamedTextColor.GRAY)
+                    .append(Component.text(rep.reporter, NamedTextColor.WHITE)),
+                Component.text("Reason  ", NamedTextColor.GRAY)
+                    .append(Component.text(rep.reason.take(32), NamedTextColor.WHITE)),
+                Component.text("${age}s ago", NamedTextColor.DARK_GRAY),
+                Component.empty(),
+                Component.text("▸ Left-click to teleport", NamedTextColor.GREEN),
+                Component.text("▸ Right-click to dismiss", NamedTextColor.RED)
             ))
             item.itemMeta = meta
-            // stash target name for click handling
-            inv.setItem(i, item)
+            inv.setItem(9 + i, item)
         }
         staff.openInventory(inv)
     }
 
-    fun reportTargetAtSlot(slot: Int): String? = reports.getOrNull(slot)?.target
-    fun dismissReport(slot: Int) { if (slot < reports.size) reports.removeAt(slot) }
+    fun reportTargetAtSlot(slot: Int): String? {
+        val idx = slot - 9
+        return reports.getOrNull(idx)?.target
+    }
+
+    fun dismissReport(slot: Int) {
+        val idx = slot - 9
+        if (idx in reports.indices) reports.removeAt(idx)
+    }
 }
 
 /** Fire-and-forget Discord webhook posts. */

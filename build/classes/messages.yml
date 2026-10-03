@@ -1,0 +1,56 @@
+# ============================================================
+# NovaGuard v1.2.0 — messages
+# {prefix} is inserted automatically. Available placeholders
+# per message are listed in comments.
+# ============================================================
+
+prefix: "&8[&3🛡 &fNovaGuard&8]"
+
+# ---------- general ----------
+no-permission: "{prefix} &cYou do not have permission to use this."
+player-only: "{prefix} &cThis command can only be used in-game."
+player-not-online: "{prefix} &cThat player is not currently online."
+reloaded: "{prefix} &aConfiguration reloaded successfully."
+usage: "{prefix} &7Usage: &f{usage}"
+
+# ---------- checks ----------
+unknown-check: "{prefix} &cUnknown check: &f{check}&c."
+check-toggled: "{prefix} &7Check &f{check} &7is now {state}."
+state-enabled: "&a&lENABLED"
+state-disabled: "&c&lDISABLED"
+
+# ---------- violations ----------
+vl-header: "{prefix} &7Violation record for &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7has a clean record."
+vl-cleared: "{prefix} &7Cleared all violations for &f{player}&7."
+
+# ---------- alerts ----------
+alerts-on: "{prefix} &7Violation alerts &aenabled&7."
+alerts-off: "{prefix} &7Violation alerts &cdisabled&7."
+alert-format: "{prefix} &f{player} &7flagged for &c{check} &8(&e{vl} VL&8)"
+
+# ---------- freeze ----------
+freeze-target-frozen: "{prefix} &cYou have been frozen by the staff team. &7Please remain still and do not log out."
+freeze-target-unfrozen: "{prefix} &aYou have been unfrozen."
+freeze-staff-frozen: "{prefix} &f{player} &7has been &cfrozen&7."
+freeze-staff-unfrozen: "{prefix} &f{player} &7has been &aunfrozen&7."
+
+# ---------- reports ----------
+report-usage: "{prefix} &7Usage: &f/report <player> <reason>"
+report-self: "{prefix} &cYou cannot report yourself."
+report-filed: "{prefix} &aReport submitted. &7A member of staff will review it shortly."
+report-notify: "{prefix} &f{reporter} &7reported &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7Report dismissed."
+
+# ---------- ban wave ----------
+wave-executed: "{prefix} &7Ban wave executed — &c{count} &7player(s) removed."
+wave-empty: "{prefix} &7The ban wave queue is currently empty."
+wave-header: "{prefix} &7Players pending ban wave:"
+wave-kick: "&cNovaGuard Security\n\n&7Your account has been flagged for review.\n&7Please contact staff on our Discord."
+wave-discord: "🛡 **Ban wave executed** — {count} player(s) removed."
+
+# ---------- punishment ----------
+punishment-broadcast: "{prefix} &f{player} &7was removed for &c{check}&7."
+punishment-discord: "🔨 **{player}** punished: `{command}`"
+wave-add-discord: "🛡 **{player}** queued for ban wave ({check}, {vl} VL)"

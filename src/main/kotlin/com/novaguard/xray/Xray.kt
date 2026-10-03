@@ -34,16 +34,16 @@ class XrayManager(private val plugin: NovaGuard) {
     fun registerHook(register: (Check) -> Unit) = register(check)
 
     fun start() {
-        val interval = plugin.config.getLong("xray.honeypot-interval-minutes", 10) * 60 * 20
+        val interval = plugin.configs.xray.getLong("xray.honeypot-interval-minutes", 10) * 60 * 20
         plugin.server.scheduler.runTaskTimer(plugin, Runnable { plantHoneypots() }, 200L, interval)
     }
 
     private fun key(b: Block) = "${b.world.name}:${b.x}:${b.y}:${b.z}"
 
     private fun plantHoneypots() {
-        if (!plugin.config.getBoolean("xray.honeypots-enabled", true)) return
-        val perCycle = plugin.config.getInt("xray.honeypots-per-cycle", 12)
-        val maxTotal = plugin.config.getInt("xray.max-honeypots", 200)
+        if (!plugin.configs.xray.getBoolean("xray.honeypots-enabled", true)) return
+        val perCycle = plugin.configs.xray.getInt("xray.honeypots-per-cycle", 12)
+        val maxTotal = plugin.configs.xray.getInt("xray.max-honeypots", 200)
         if (honeypots.size >= maxTotal) return
         val fakes = listOf(Material.DIAMOND_ORE, Material.DEEPSLATE_DIAMOND_ORE,
             Material.EMERALD_ORE, Material.ANCIENT_DEBRIS)
@@ -109,10 +109,10 @@ class XrayManager(private val plugin: NovaGuard) {
         }
         val total = d.addInt("xray_total", 1)
         if (!exposed) d.addInt("xray_unexposed", 1)
-        val minSample = plugin.config.getInt("xray.unexposed-min-sample", 20)
+        val minSample = plugin.configs.xray.getInt("xray.unexposed-min-sample", 20)
         if (total >= minSample) {
             val ratio = d.getInt("xray_unexposed").toDouble() / total
-            if (ratio > plugin.config.getDouble("xray.unexposed-ratio-threshold", 0.55)) {
+            if (ratio > plugin.configs.xray.getDouble("xray.unexposed-ratio-threshold", 0.55)) {
                 check.flag(p, d, "unexposed ratio ${"%.0f".format(ratio * 100)}% ($total ores)")
                 d.setInt("xray_total", 0); d.setInt("xray_unexposed", 0)
             }
@@ -123,7 +123,7 @@ class XrayManager(private val plugin: NovaGuard) {
             val now = System.currentTimeMillis()
             if (now - d.getLong("xray_dia_window") > 3600_000) {
                 d.setLong("xray_dia_window", now); d.setInt("xray_dia", 1)
-            } else if (d.addInt("xray_dia", 1) > plugin.config.getInt("xray.max-diamonds-per-hour", 32)) {
+            } else if (d.addInt("xray_dia", 1) > plugin.configs.xray.getInt("xray.max-diamonds-per-hour", 32)) {
                 check.flag(p, d, "${d.getInt("xray_dia")} diamonds/hour")
                 d.setInt("xray_dia", 0)
             }

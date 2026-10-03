@@ -7,101 +7,109 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
+import org.bukkit.entity.Player
 
 class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabCompleter {
 
+    private fun msg(key: String, vararg vars: Pair<String, String>) =
+        plugin.configs.msg(key, *vars)
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (!sender.hasPermission("novaguard.admin")) {
-            sender.sendMessage("§cNo permission.")
+            sender.sendMessage(msg("no-permission"))
             return true
         }
         if (args.isEmpty()) {
-            sender.sendMessage("§8[§cNovaGuard§8] §7/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history>")
+            sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history>"))
             return true
         }
         when (args[0].lowercase()) {
             "reload" -> {
                 plugin.reloadAll()
-                sender.sendMessage("§aNovaGuard config reloaded.")
+                sender.sendMessage(msg("reloaded"))
             }
             "list" -> {
-                sender.sendMessage("§8[§cNovaGuard§8] §7Checks:")
+                sender.sendMessage("§8[§3🛡 §fNovaGuard§8] §7Registered checks:")
                 for (type in CheckType.values()) {
                     val line = plugin.checks.byType(type).joinToString("§8, ") {
                         (if (it.enabled) "§a" else "§c") + it.id
                     }
-                    sender.sendMessage("§7${type.name}: $line")
+                    sender.sendMessage("§8▸ §7${type.name}: $line")
                 }
             }
             "toggle" -> {
-                if (args.size < 2) { sender.sendMessage("§cUsage: /novaguard toggle <check>"); return true }
+                if (args.size < 2) { sender.sendMessage(msg("usage", "usage" to "/novaguard toggle <check>")); return true }
                 val check = plugin.checks.get(args[1])
-                if (check == null) { sender.sendMessage("§cUnknown check: ${args[1]}"); return true }
+                if (check == null) { sender.sendMessage(msg("unknown-check", "check" to args[1])); return true }
                 check.enabled = !check.enabled
-                plugin.config.set("checks.${check.id}.enabled", check.enabled)
-                plugin.saveConfig()
-                sender.sendMessage("§7Check §f${check.id} §7is now " + if (check.enabled) "§aENABLED" else "§cDISABLED")
+                plugin.configs.checks.set("checks.${check.id}.enabled", check.enabled)
+                plugin.configs.saveChecks()
+                val state = msg(if (check.enabled) "state-enabled" else "state-disabled")
+                sender.sendMessage(msg("check-toggled", "check" to check.id, "state" to state))
             }
             "vl" -> {
-                if (args.size < 2) { sender.sendMessage("§cUsage: /novaguard vl <player>"); return true }
+                if (args.size < 2) { sender.sendMessage(msg("usage", "usage" to "/novaguard vl <player>")); return true }
                 val target = Bukkit.getPlayer(args[1])
-                if (target == null) { sender.sendMessage("§cPlayer not online."); return true }
+                if (target == null) { sender.sendMessage(msg("player-not-online")); return true }
                 val snap = plugin.data.get(target.uniqueId).vlSnapshot()
-                if (snap.isEmpty()) sender.sendMessage("§7${target.name} has no violations.")
+                if (snap.isEmpty()) sender.sendMessage(msg("vl-empty", "player" to target.name))
                 else {
-                    sender.sendMessage("§8[§cNovaGuard§8] §7VLs for §f${target.name}§7:")
+                    sender.sendMessage(msg("vl-header", "player" to target.name))
                     snap.entries.sortedByDescending { it.value }.forEach { (id, vl) ->
-                        sender.sendMessage("§7- §f$id§8: §e${"%.1f".format(vl)}")
+                        sender.sendMessage(msg("vl-line", "check" to id, "vl" to "%.1f".format(vl)))
                     }
                 }
             }
             "vlreset" -> {
-                if (args.size < 2) { sender.sendMessage("§cUsage: /novaguard vlreset <player>"); return true }
+                if (args.size < 2) { sender.sendMessage(msg("usage", "usage" to "/novaguard vlreset <player>")); return true }
                 val target = Bukkit.getPlayer(args[1])
-                if (target == null) { sender.sendMessage("§cPlayer not online."); return true }
+                if (target == null) { sender.sendMessage(msg("player-not-online")); return true }
                 plugin.data.get(target.uniqueId).resetAllVls()
-                sender.sendMessage("§aCleared violations for ${target.name}.")
+                sender.sendMessage(msg("vl-cleared", "player" to target.name))
             }
             "alerts" -> {
-                val p = sender as? org.bukkit.entity.Player ?: run {
-                    sender.sendMessage("§cPlayers only."); return true
+                val p = sender as? Player ?: run {
+                    sender.sendMessage(msg("player-only")); return true
                 }
                 val d = plugin.data.get(p.uniqueId)
                 d.alertsEnabled = !d.alertsEnabled
-                sender.sendMessage("§7Alerts " + if (d.alertsEnabled) "§aON" else "§cOFF")
+                sender.sendMessage(msg(if (d.alertsEnabled) "alerts-on" else "alerts-off"))
             }
             "freeze" -> {
-                if (args.size < 2) { sender.sendMessage("§cUsage: /novaguard freeze <player>"); return true }
+                if (args.size < 2) { sender.sendMessage(msg("usage", "usage" to "/novaguard freeze <player>")); return true }
                 val target = Bukkit.getPlayer(args[1])
-                if (target == null) { sender.sendMessage("§cPlayer not online."); return true }
-                plugin.staff.toggleFreeze(sender as? org.bukkit.entity.Player ?: return true, target)
+                if (target == null) { sender.sendMessage(msg("player-not-online")); return true }
+                val staff = sender as? Player ?: run {
+                    sender.sendMessage(msg("player-only")); return true
+                }
+                plugin.staff.toggleFreeze(staff, target)
             }
             "wave" -> {
                 plugin.staff.banWave(sender)
             }
             "wavelist" -> {
-                if (plugin.staff.waveList.isEmpty()) { sender.sendMessage("§7Ban wave list is empty."); return true }
-                sender.sendMessage("§8[§cNovaGuard§8] §7Pending ban wave:")
+                if (plugin.staff.waveList.isEmpty()) { sender.sendMessage(msg("wave-empty")); return true }
+                sender.sendMessage(msg("wave-header"))
                 plugin.staff.waveList.forEach { uuid ->
-                    sender.sendMessage("§7- §f${Bukkit.getOfflinePlayer(uuid).name ?: uuid}")
+                    sender.sendMessage("§8▸ §f${Bukkit.getOfflinePlayer(uuid).name ?: uuid}")
                 }
             }
             "reports" -> {
-                val p = sender as? org.bukkit.entity.Player ?: run {
-                    sender.sendMessage("§cPlayers only."); return true
+                val p = sender as? Player ?: run {
+                    sender.sendMessage(msg("player-only")); return true
                 }
                 plugin.staff.openReports(p)
             }
             "history" -> {
-                if (args.size < 2) { sender.sendMessage("§cUsage: /novaguard history <player>"); return true }
-                val p = sender as? org.bukkit.entity.Player ?: run {
-                    sender.sendMessage("§cPlayers only."); return true
+                if (args.size < 2) { sender.sendMessage(msg("usage", "usage" to "/novaguard history <player>")); return true }
+                val p = sender as? Player ?: run {
+                    sender.sendMessage(msg("player-only")); return true
                 }
                 val target = Bukkit.getPlayer(args[1])
-                if (target == null) { sender.sendMessage("§cPlayer not online."); return true }
+                if (target == null) { sender.sendMessage(msg("player-not-online")); return true }
                 plugin.staff.openHistory(p, target)
             }
-            else -> sender.sendMessage("§cUnknown subcommand.")
+            else -> sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history>"))
         }
         return true
     }

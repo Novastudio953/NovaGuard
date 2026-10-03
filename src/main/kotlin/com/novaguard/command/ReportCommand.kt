@@ -12,18 +12,20 @@ import org.bukkit.entity.Player
 class ReportCommand(private val plugin: NovaGuard) : CommandExecutor, TabCompleter {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        val p = sender as? Player ?: run { sender.sendMessage("§cPlayers only."); return true }
+        val p = sender as? Player ?: run {
+            sender.sendMessage(plugin.configs.msg("player-only")); return true
+        }
         if (args.size < 2) {
-            p.sendMessage("§cUsage: /report <player> <reason>")
+            p.sendMessage(plugin.configs.msg("report-usage"))
             return true
         }
         val target = args[0]
         if (Bukkit.getPlayer(target) == null) {
-            p.sendMessage("§cPlayer not online.")
+            p.sendMessage(plugin.configs.msg("player-not-online"))
             return true
         }
         if (target.equals(p.name, true)) {
-            p.sendMessage("§cYou can't report yourself.")
+            p.sendMessage(plugin.configs.msg("report-self"))
             return true
         }
         plugin.staff.fileReport(p, target, args.drop(1).joinToString(" "))

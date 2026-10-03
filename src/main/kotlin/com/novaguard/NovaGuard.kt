@@ -5,6 +5,7 @@ import com.novaguard.check.CheckManager
 import com.novaguard.checks.ExtraChecks
 import com.novaguard.command.GuardCommand
 import com.novaguard.command.ReportCommand
+import com.novaguard.config.ConfigManager
 import com.novaguard.data.DataManager
 import com.novaguard.listener.BlockListener
 import com.novaguard.listener.CombatListener
@@ -30,6 +31,8 @@ class NovaGuard : JavaPlugin() {
         private set
     lateinit var staff: StaffTools
         private set
+    lateinit var configs: ConfigManager
+        private set
 
     /** Bedrock (Geyser) leniency state, loaded from config. */
     var bedrockLeniency: Boolean = true
@@ -38,6 +41,8 @@ class NovaGuard : JavaPlugin() {
     override fun onEnable() {
         saveDefaultConfig()
         com.novaguard.support.BedrockSupport.init(this)
+        configs = ConfigManager(this)
+        configs.load()
         data = DataManager()
         xray = XrayManager(this)          // before CheckManager (registers xray check)
         checks = CheckManager(this)
@@ -89,6 +94,7 @@ class NovaGuard : JavaPlugin() {
 
     fun reloadAll() {
         reloadConfig()
+        configs.load()
         checks.load()
         alerts.load()
         punishments.load()

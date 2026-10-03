@@ -29,16 +29,16 @@ class CheckManager(private val plugin: NovaGuard) {
 
     fun byType(type: CheckType): List<Check> = checks.values.filter { it.type == type }
 
-    /** Load per-check toggles from config, Vulcan-style. */
+    /** Load per-check toggles from checks.yml, Vulcan-style. */
     fun load() {
-        val section = plugin.config.getConfigurationSection("checks") ?: return
+        val cfg = plugin.configs.checks
         for (check in checks.values) {
             val path = "checks.${check.id}"
-            check.enabled = plugin.config.getBoolean("$path.enabled", true)
-            check.maxVl = plugin.config.getDouble("$path.max-vl", 10.0)
-            check.punishment = plugin.config.getString("$path.punishment", check.punishment)!!
-            check.banCommand = plugin.config.getString("$path.ban-command", check.banCommand)!!
-            check.banVlMultiplier = plugin.config.getDouble("$path.ban-vl-multiplier", 3.0)
+            check.enabled = cfg.getBoolean("$path.enabled", true)
+            check.maxVl = cfg.getDouble("$path.max-vl", 10.0)
+            check.punishment = cfg.getString("$path.punishment", check.punishment)!!
+            check.banCommand = cfg.getString("$path.ban-command", check.banCommand)!!
+            check.banVlMultiplier = cfg.getDouble("$path.ban-vl-multiplier", 3.0)
         }
         plugin.bedrockLeniency = plugin.config.getBoolean("bedrock.enabled", true)
         plugin.bedrockExempt = plugin.config.getStringList("bedrock.exempt-checks")

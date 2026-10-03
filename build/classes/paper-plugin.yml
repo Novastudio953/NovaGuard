@@ -1,9 +1,9 @@
 name: NovaGuard
-version: 1.1.1
+version: 1.2.0
 main: com.novaguard.NovaGuard
 api-version: '1.21'
 author: Joel
-description: Original lightweight anti-cheat with 38 toggleable checks.
+description: Original premium anti-cheat with 38 toggleable checks.
 website: https://github.com/reach1234889
 softdepend: [floodgate, Geyser-Spigot]
 commands:

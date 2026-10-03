@@ -27,10 +27,11 @@ class PunishmentManager(private val plugin: NovaGuard) {
         // ban-wave mode: defer bans into the wave list instead of banning now
         if (isBan && plugin.config.getBoolean("settings.ban-wave-mode", false)) {
             plugin.staff.waveList.add(player.uniqueId)
-            player.kickPlayer("§cFlagged by NovaGuard. Your case is pending review.")
+            player.kickPlayer(plugin.configs.msg("wave-kick"))
             plugin.logger.info("[PUNISH] ${player.name} added to ban wave (${check.displayName})")
             com.novaguard.staff.DiscordHook.send(plugin,
-                "🌊 **${player.name}** added to ban wave (${check.displayName}, VL ${"%.1f".format(vl)})")
+                plugin.configs.msg("wave-add-discord", "player" to player.name,
+                    "check" to check.displayName, "vl" to "%.1f".format(vl)))
             return
         }
 
@@ -45,15 +46,12 @@ class PunishmentManager(private val plugin: NovaGuard) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command)
         })
         com.novaguard.staff.DiscordHook.send(plugin,
-            "🔨 **${player.name}** punished: `$command`")
+            plugin.configs.msg("punishment-discord", "player" to player.name, "command" to command))
 
         if (broadcastPunishments) {
-            val msg = plugin.config.getString("settings.punishment-broadcast",
-                "&8[&cNovaGuard&8] &f{player} &7was punished for &c{check}")!!
-                .replace("{player}", player.name)
-                .replace("{check}", check.displayName)
-            // strip color codes simply
-            Bukkit.broadcastMessage(msg.replace(Regex("&[0-9a-fk-or]"), ""))
+            val msg = plugin.configs.msg("punishment-broadcast",
+                "player" to player.name, "check" to check.displayName)
+            Bukkit.broadcastMessage(msg)
         }
     }
 
