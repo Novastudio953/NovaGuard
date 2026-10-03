@@ -1,9 +1,9 @@
 # NovaGuard
 
-A high-performance anti-cheat for **Paper 1.21** servers, crafted by **Nova Studio**.
+A high-performance anti-cheat for **Paper 1.21 through the latest release** servers, crafted by **Nova Studio**.
 
 [![Version](https://img.shields.io/badge/version-1.6.0-blue)](https://github.com/reach1234889)
-[![Paper](https://img.shields.io/badge/paper-1.21-orange)](https://papermc.io)
+[![Paper](https://img.shields.io/badge/paper-1.21%E2%80%93latest-orange)](https://papermc.io)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.x-purple)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
@@ -85,7 +85,7 @@ All files generate with sane defaults on first run.
 2. Drop it into your server's `plugins/` folder.
 3. Restart the server. Configuration files generate automatically.
 
-**Requirements:** Paper 1.21+ (or a fork), Java 21.
+**Requirements:** Paper 1.21 or newer (including the latest 26.x builds), Java 21.
 
 ---
 
