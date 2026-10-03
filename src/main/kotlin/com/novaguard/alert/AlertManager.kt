@@ -26,7 +26,8 @@ class AlertManager(private val plugin: NovaGuard) {
             "vl" to "%.1f".format(vl),
             "info" to info))
         val hover = Component.text()
-            .append(Component.text("🛡 NovaGuard Detection", NamedTextColor.AQUA, TextDecoration.BOLD)).append(Component.newline())
+            .append(Component.text("NovaGuard", NamedTextColor.AQUA, TextDecoration.BOLD)
+            .append(Component.text(" Detection", NamedTextColor.DARK_AQUA, TextDecoration.BOLD))).append(Component.newline())
             .append(Component.text("──────────────────", NamedTextColor.DARK_GRAY)).append(Component.newline())
             .append(Component.text("Player  ", NamedTextColor.GRAY))
             .append(Component.text(player.name, NamedTextColor.WHITE)).append(Component.newline())

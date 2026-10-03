@@ -29,7 +29,7 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
                 sender.sendMessage(msg("reloaded"))
             }
             "list" -> {
-                sender.sendMessage("§8[§3🛡 §fNovaGuard§8] §7Registered checks:")
+                sender.sendMessage("§8[§b§lNova§3§lGuard§8] §7Registered checks:")
                 for (type in CheckType.values()) {
                     val line = plugin.checks.byType(type).joinToString("§8, ") {
                         (if (it.enabled) "§a" else "§c") + it.id

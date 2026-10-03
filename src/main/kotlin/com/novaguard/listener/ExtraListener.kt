@@ -65,7 +65,7 @@ class ExtraListener(private val plugin: NovaGuard) : Listener {
         val p = e.whoClicked as? Player ?: return
         // staff GUI handling first
         val title = e.view.title
-        if (title.startsWith("§8🛡 NovaGuard §8|")) {
+        if (title.startsWith("§8[§b§lNova§3§lGuard§8]")) {
             e.isCancelled = true
             if (title.endsWith("Player Reports")) {
                 val slot = e.rawSlot

@@ -81,7 +81,7 @@ class StaffTools(private val plugin: NovaGuard) {
         for (i in inv.size - 9 until inv.size) inv.setItem(i, pane)
     }
 
-    private fun title(text: String) = "§8🛡 NovaGuard §8| §f$text"
+    private fun title(text: String) = "§8[§b§lNova§3§lGuard§8] §f$text"
 
     // ---------- history GUI ----------
     fun openHistory(staff: Player, target: Player) {

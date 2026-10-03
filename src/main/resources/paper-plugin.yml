@@ -1,5 +1,5 @@
 name: NovaGuard
-version: 1.2.0
+version: 1.2.1
 main: com.novaguard.NovaGuard
 api-version: '1.21'
 author: Joel

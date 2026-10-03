@@ -1,10 +1,10 @@
 # ============================================================
-# NovaGuard v1.2.0 — messages
+# NovaGuard v1.2.1 — messages
 # {prefix} is inserted automatically. Available placeholders
 # per message are listed in comments.
 # ============================================================
 
-prefix: "&8[&3🛡 &fNovaGuard&8]"
+prefix: "&8[&b&lNova&3&lGuard&8]"
 
 # ---------- general ----------
 no-permission: "{prefix} &cYou do not have permission to use this."
@@ -48,9 +48,9 @@ wave-executed: "{prefix} &7Ban wave executed — &c{count} &7player(s) removed."
 wave-empty: "{prefix} &7The ban wave queue is currently empty."
 wave-header: "{prefix} &7Players pending ban wave:"
 wave-kick: "&cNovaGuard Security\n\n&7Your account has been flagged for review.\n&7Please contact staff on our Discord."
-wave-discord: "🛡 **Ban wave executed** — {count} player(s) removed."
+wave-discord: "**NovaGuard** — ban wave executed, {count} player(s) removed."
 
 # ---------- punishment ----------
 punishment-broadcast: "{prefix} &f{player} &7was removed for &c{check}&7."
-punishment-discord: "🔨 **{player}** punished: `{command}`"
-wave-add-discord: "🛡 **{player}** queued for ban wave ({check}, {vl} VL)"
+punishment-discord: "**NovaGuard** — {player} punished: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} queued for ban wave ({check}, {vl} VL)"
