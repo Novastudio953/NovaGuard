@@ -1,5 +1,5 @@
 name: NovaGuard
-version: 1.2.1
+version: 1.3.0
 main: com.novaguard.NovaGuard
 api-version: '1.21'
 author: Joel
@@ -15,6 +15,11 @@ commands:
   report:
     description: Report a suspected cheater to staff
     usage: /report <player> <reason>
+  sus:
+    description: Open the suspects GUI with all flagged players
+    usage: /sus
+    aliases: [suspects]
+    permission: novaguard.sus
 permissions:
   novaguard.admin:
     description: Full NovaGuard admin access
@@ -24,4 +29,7 @@ permissions:
     default: op
   novaguard.bypass:
     description: Exempt from all NovaGuard checks
+    default: op
+  novaguard.sus:
+    description: Access the suspects GUI
     default: op

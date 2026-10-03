@@ -16,6 +16,7 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.Duration
 import java.util.UUID
+import org.bukkit.inventory.meta.SkullMeta
 
 data class Report(val reporter: String, val target: String, val reason: String, val time: Long)
 
@@ -161,6 +162,61 @@ class StaffTools(private val plugin: NovaGuard) {
     fun dismissReport(slot: Int) {
         val idx = slot - 9
         if (idx in reports.indices) reports.removeAt(idx)
+    }
+
+    // ---------- suspects GUI ----------
+    private val suspectCache = mutableMapOf<UUID, List<UUID>>()
+
+    fun openSuspects(staff: Player) {
+        val threshold = plugin.config.getDouble("settings.sus-vl-threshold", 5.0)
+        val suspects = Bukkit.getOnlinePlayers()
+            .map { p -> p.uniqueId to plugin.checks.all.sumOf { c -> plugin.data.get(p.uniqueId).getVl(c.id) } }
+            .filter { it.second >= threshold }
+            .sortedByDescending { it.second }
+        suspectCache[staff.uniqueId] = suspects.map { it.first }
+        val inv = Bukkit.createInventory(null, 54, title("Suspects"))
+        border(inv)
+        for ((i, pair) in suspects.take(36).withIndex()) {
+            val uuid = pair.first
+            val total = pair.second
+            val p = Bukkit.getPlayer(uuid) ?: continue
+            val d = plugin.data.get(uuid)
+            val item = ItemStack(Material.PLAYER_HEAD)
+            val meta = item.itemMeta as SkullMeta
+            meta.owningPlayer = p
+            meta.displayName(Component.text(p.name, NamedTextColor.RED, TextDecoration.BOLD))
+            val top = plugin.checks.all
+                .map { c -> c.displayName to d.getVl(c.id) }
+                .filter { it.second > 0 }
+                .sortedByDescending { it.second }
+                .take(3)
+            val lore = mutableListOf<Component>()
+            lore.add(Component.text("Threat  ", NamedTextColor.GRAY)
+                .append(Component.text("%.1f VL".format(total), NamedTextColor.YELLOW)))
+            val ping = try { p.ping } catch (_: Exception) { -1 }
+            lore.add(Component.text("Ping  ", NamedTextColor.GRAY)
+                .append(Component.text("$ping ms", NamedTextColor.YELLOW)))
+            lore.add(Component.text("Client  ", NamedTextColor.GRAY)
+                .append(Component.text(if (d.checkBedrock()) "Bedrock" else "Java", NamedTextColor.AQUA)))
+            lore.add(Component.empty())
+            lore.add(Component.text("Top detections:", NamedTextColor.GRAY))
+            for ((name, vl) in top) {
+                lore.add(Component.text("▸ $name  ", NamedTextColor.DARK_GRAY)
+                    .append(Component.text("%.1f".format(vl), NamedTextColor.RED)))
+            }
+            lore.add(Component.empty())
+            lore.add(Component.text("▸ Left-click to teleport", NamedTextColor.GREEN))
+            lore.add(Component.text("▸ Right-click for history", NamedTextColor.GOLD))
+            meta.lore(lore)
+            item.itemMeta = meta
+            inv.setItem(9 + i, item)
+        }
+        staff.openInventory(inv)
+    }
+
+    fun suspectAtSlot(staff: UUID, slot: Int): UUID? {
+        val idx = slot - 9
+        return suspectCache[staff]?.getOrNull(idx)
     }
 }
 

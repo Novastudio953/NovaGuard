@@ -80,6 +80,16 @@ class ExtraListener(private val plugin: NovaGuard) : Listener {
                         p.performCommand("tp $target")
                     }
                 }
+            } else if (title.endsWith("Suspects")) {
+                val slot = e.rawSlot
+                val uuid = plugin.staff.suspectAtSlot(p.uniqueId, slot) ?: return
+                val target = org.bukkit.Bukkit.getPlayer(uuid) ?: return
+                p.closeInventory()
+                if (e.isRightClick) {
+                    plugin.staff.openHistory(p, target)
+                } else {
+                    p.performCommand("tp ${target.name}")
+                }
             }
             return
         }

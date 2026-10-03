@@ -20,6 +20,8 @@ settings:
   ban-wave-mode: false
   # how often (seconds) inventories are scanned for illegal items
   illegal-scan-seconds: 60
+  # total VL across all checks before a player shows in /sus
+  sus-vl-threshold: 5.0
 
 # ============================================================
 # Bedrock (Geyser/Floodgate) leniency

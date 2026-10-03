@@ -5,6 +5,7 @@ import com.novaguard.check.CheckManager
 import com.novaguard.checks.ExtraChecks
 import com.novaguard.command.GuardCommand
 import com.novaguard.command.ReportCommand
+import com.novaguard.command.SusCommand
 import com.novaguard.config.ConfigManager
 import com.novaguard.data.DataManager
 import com.novaguard.listener.BlockListener
@@ -66,6 +67,9 @@ class NovaGuard : JavaPlugin() {
         val report = ReportCommand(this)
         getCommand("report")?.setExecutor(report)
         getCommand("report")?.tabCompleter = report
+        val sus = SusCommand(this)
+        getCommand("sus")?.setExecutor(sus)
+        getCommand("sus")?.tabCompleter = sus
 
         // VL decay task
         server.scheduler.runTaskTimerAsynchronously(this, Runnable {
