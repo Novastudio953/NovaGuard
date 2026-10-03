@@ -68,5 +68,17 @@ class MoveListener(private val plugin: NovaGuard) : Listener {
         (plugin.checks.get("afkmacro") as? com.novaguard.checks.MacroChecks.AfkMacro)?.let {
             if (it.enabled) it.onMove(e, p, d)
         }
+        // wave-3 movement checks
+        (plugin.checks.get("strafe") as? com.novaguard.checks.AdvancedChecks.Strafe)?.let {
+            if (it.enabled) it.onMove(e, p, d, maxPing)
+        }
+        (plugin.checks.get("groundspoof") as? com.novaguard.checks.AdvancedChecks.GroundSpoof)?.let {
+            if (it.enabled) it.onMove(e, p, d, maxPing)
+        }
+        // aimbot rotation tracking + evidence recording
+        (plugin.checks.get("aimbot") as? com.novaguard.checks.AdvancedChecks.Aimbot)?.let {
+            if (it.enabled) it.onMove(e, p, d)
+        }
+        plugin.evidence.record(p)
     }
 }

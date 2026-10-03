@@ -1,7 +1,9 @@
 # ============================================================
-# NovaGuard v1.2.1 — messages
+# NovaGuard v1.7.0 — messages
 # {prefix} is inserted automatically. Available placeholders
 # per message are listed in comments.
+# Set settings.language in config.yml to es/tl for bundled
+# translations (languages/<lang>.yml overrides these keys).
 # ============================================================
 
 prefix: "&8[&b&lNova&3&lGuard&8]"
@@ -57,3 +59,18 @@ wave-add-discord: "**NovaGuard** — {player} queued for ban wave ({check}, {vl}
 
 # ---------- vpn ----------
 vpn-kick: "{prefix} &cVPNs, proxies and hosting services are not allowed on this server."
+
+# ---------- verbose ----------
+verbose-on: "{prefix} &7Verbose enabled for &f{player}&7 — live detections will appear here."
+verbose-off: "{prefix} &7Verbose disabled for &f{player}&7."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+# ---------- evidence / replay ----------
+replay-start: "{prefix} &7Replaying &f{player}&7's last &e{seconds}s&7 of movement."
+replay-end: "{prefix} &7Replay of &f{player} &7finished."
+replay-stopped: "{prefix} &7Replay stopped."
+replay-none: "{prefix} &cNo movement data recorded for &f{player} &cyet."
+evidence-info: "{prefix} &7Evidence for &f{player}&8: &e{samples} &7samples (&e{seconds}s&7)."
+
+# ---------- update checker ----------
+update-available: "{prefix} &eA new NovaGuard version is available: &fv{latest} &e(you run v{current}). &7Get it at &bgithub.com/Novastudio953/NovaGuard/releases"

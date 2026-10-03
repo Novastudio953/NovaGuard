@@ -2,12 +2,12 @@
 
 A high-performance anti-cheat for **Paper 1.21 through the latest release** servers, crafted by **Nova Studio**.
 
-[![Version](https://img.shields.io/badge/version-1.6.0-blue)](https://github.com/reach1234889)
+[![Version](https://img.shields.io/badge/version-1.7.0-blue)](https://github.com/Novastudio953/NovaGuard/releases)
 [![Paper](https://img.shields.io/badge/paper-1.21%E2%80%93latest-orange)](https://papermc.io)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.x-purple)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-NovaGuard ships **44 toggleable checks** covering movement, combat, exploits, and macro-style automation — with a violation-level (VL) system, staff tooling, and smart false-positive protection built in.
+NovaGuard ships **50 toggleable checks** covering movement, combat, exploits, and macro-style automation — with a violation-level (VL) system, staff tooling, and smart false-positive protection built in.
 
 ---
 
@@ -16,11 +16,11 @@ NovaGuard ships **44 toggleable checks** covering movement, combat, exploits, an
 ### Detection
 Every check is individually toggleable and carries its own max-VL, punishment, and ban-command configuration.
 
-**Movement** — Fly, Speed, Timer, Jesus, Step, NoFall, Spider, Scaffold, Phase, ElytraFly, NoSlow, Sprint, BoatFly
+**Movement** — Fly, Speed, Timer, Jesus, Step, NoFall, Spider, Scaffold, Phase, ElytraFly, NoSlow, Sprint, BoatFly, Strafe, GroundSpoof
 
-**Combat** — KillAura (Rate / Angle / Cooldown), Reach, AutoClicker, Criticals, Velocity, CrystalAura, AutoTotem, FastBow
+**Combat** — KillAura (Rate / Angle / Cooldown), Reach, AutoClicker, Criticals, Velocity, CrystalAura, AutoTotem, FastBow, Regen, Aimbot
 
-**Exploit** — FastPlace, FastBreak, Nuker, FastEat, BadPackets, InventoryMove, PingSpoof, ChestStealer, InventoryClicker, GhostHand, Derp, Baritone, BookBan, IllegalItems, Xray
+**Exploit** — FastPlace, FastBreak, Nuker, FastEat, BadPackets, InventoryMove, PingSpoof, ChestStealer, InventoryClicker, GhostHand, Derp, Baritone, BookBan, IllegalItems, Xray, AutoArmor, AutoTool
 
 **Anti-macro / client** — Macro interval detection, ClickSignature timing, AFKMacro micro-movement, InventoryBot loops, ChatMacro timing, ClientBrand blocklist
 
@@ -30,9 +30,33 @@ Honeypot ores hidden inside solid rock, unexposed-ore ratio tracking, and diamon
 ### Staff tools
 - `/sus` — suspects GUI with threat scores, top detections, ping, Java/Bedrock status; click to teleport or view history
 - `/novaguard freeze` — freeze a suspect in place
+- `/novaguard verbose <player>` — stream a player's live detections
+- `/novaguard replay <player>` — replay their last ~20 seconds of movement
+- `/novaguard config` — toggle checks in-game via GUI
 - Ban waves — queue bans and execute them all at once
 - Player reports (`/report`), violation history, click-to-teleport alerts
 - Discord webhook notifications
+- Update checker — staff are notified when a new release drops
+- Multi-language messages — English, Español, Tagalog (`settings.language`)
+
+### Developer API
+Other plugins can observe or cancel detections:
+
+```java
+// listen for flags
+@EventHandler
+public void onFlag(NovaGuardFlagEvent e) {
+    getLogger().info(e.getPlayer().getName() + " flagged: " + e.getCheck().getId());
+    // e.setCancelled(true); // cancel the violation entirely
+}
+
+// query state
+double vl = NovaGuardAPI.getInstance().getViolationLevel(player, "killaura-rate");
+```
+
+---
+
+## Commands
 
 ### False-positive protection
 - **Grace period** — brand-new players need 2x VL before any punishment lands
@@ -81,7 +105,7 @@ All files generate with sane defaults on first run.
 
 ## Installation
 
-1. Download the latest `NovaGuard-1.6.0.jar` from the releases page.
+1. Download the latest `NovaGuard-1.7.0.jar` from the releases page.
 2. Drop it into your server's `plugins/` folder.
 3. Restart the server. Configuration files generate automatically.
 
@@ -101,7 +125,7 @@ kotlinc -no-stdlib -no-reflect \
 
 # add resources, shade the Kotlin stdlib, and package
 cp -r src/main/resources/* build/classes/
-jar cf NovaGuard-1.6.0.jar -C build/classes .
+jar cf NovaGuard-1.7.0.jar -C build/classes .
 ```
 
 ---

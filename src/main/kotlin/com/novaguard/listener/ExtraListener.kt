@@ -49,6 +49,22 @@ class ExtraListener(private val plugin: NovaGuard) : Listener {
                 if (it.enabled) it.onAction(p, d)
             }
         }
+        // autotool: track block-hit timing
+        if (e.action == org.bukkit.event.block.Action.LEFT_CLICK_BLOCK) {
+            (plugin.checks.get("autotool") as? com.novaguard.checks.AdvancedChecks.AutoTool)?.let {
+                if (it.enabled) it.onBlockHit(d)
+            }
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    fun onHeldChange(e: org.bukkit.event.player.PlayerItemHeldEvent) {
+        val p = e.player
+        val d = plugin.data.get(p.uniqueId)
+        if (d.isExempt(p)) return
+        (plugin.checks.get("autotool") as? com.novaguard.checks.AdvancedChecks.AutoTool)?.let {
+            if (it.enabled) it.onHeldChange(e, p, d)
+        }
     }
 
     @EventHandler
@@ -77,7 +93,9 @@ class ExtraListener(private val plugin: NovaGuard) : Listener {
         val title = e.view.title
         if (title.startsWith("§8[§b§lNova§3§lGuard§8]")) {
             e.isCancelled = true
-            if (title.endsWith("Player Reports")) {
+            if (plugin.configGui.isOurGui(title)) {
+                plugin.configGui.onClick(p, e.rawSlot, e.inventory)
+            } else if (title.endsWith("Player Reports")) {
                 val slot = e.rawSlot
                 if (e.isRightClick) {
                     plugin.staff.dismissReport(slot)
@@ -107,6 +125,9 @@ class ExtraListener(private val plugin: NovaGuard) : Listener {
         if (d.isExempt(p)) return
         check<ExtraChecks.ChestStealer>("cheststealer")?.onTake(p, d, e)
         check<ExtraChecks.InventoryClicker>("inventoryclicker")?.onClick(p, d)
+        (plugin.checks.get("autoarmor") as? com.novaguard.checks.AdvancedChecks.AutoArmor)?.let {
+            if (it.enabled) it.onClick(e, p, d)
+        }
         (plugin.checks.get("invbot") as? com.novaguard.checks.MacroChecks.InventoryBot)?.let {
             if (it.enabled) it.onClick(p, d, e.slot)
         }

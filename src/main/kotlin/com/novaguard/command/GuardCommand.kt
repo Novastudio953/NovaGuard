@@ -20,7 +20,7 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
             return true
         }
         if (args.isEmpty()) {
-            sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history>"))
+            sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history|verbose|replay|evidence|config>"))
             return true
         }
         when (args[0].lowercase()) {
@@ -109,7 +109,48 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
                 if (target == null) { sender.sendMessage(msg("player-not-online")); return true }
                 plugin.staff.openHistory(p, target)
             }
-            else -> sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history>"))
+            "verbose" -> {
+                if (args.size < 2) { sender.sendMessage(msg("usage", "usage" to "/novaguard verbose <player>")); return true }
+                val p = sender as? Player ?: run {
+                    sender.sendMessage(msg("player-only")); return true
+                }
+                val target = Bukkit.getPlayer(args[1])
+                if (target == null) { sender.sendMessage(msg("player-not-online")); return true }
+                val watching = plugin.verbose.toggle(p, target)
+                sender.sendMessage(msg(if (watching) "verbose-on" else "verbose-off", "player" to target.name))
+            }
+            "replay" -> {
+                if (args.size < 2) { sender.sendMessage(msg("usage", "usage" to "/novaguard replay <player>")); return true }
+                val p = sender as? Player ?: run {
+                    sender.sendMessage(msg("player-only")); return true
+                }
+                if (plugin.evidence.isReplaying(p.uniqueId)) {
+                    plugin.evidence.stopReplay(p.uniqueId)
+                    sender.sendMessage(msg("replay-stopped"))
+                    return true
+                }
+                val target = Bukkit.getPlayer(args[1])
+                if (target == null) { sender.sendMessage(msg("player-not-online")); return true }
+                if (!plugin.evidence.replay(p, target))
+                    sender.sendMessage(msg("replay-none", "player" to target.name))
+            }
+            "evidence" -> {
+                if (args.size < 2) { sender.sendMessage(msg("usage", "usage" to "/novaguard evidence <player>")); return true }
+                val target = Bukkit.getOfflinePlayer(args[1])
+                val samples = plugin.evidence.sampleCount(target.uniqueId)
+                val secs = plugin.evidence.secondsRecorded(target.uniqueId)
+                sender.sendMessage(msg("evidence-info",
+                    "player" to (target.name ?: args[1]),
+                    "samples" to samples.toString(),
+                    "seconds" to "%.1f".format(secs)))
+            }
+            "config" -> {
+                val p = sender as? Player ?: run {
+                    sender.sendMessage(msg("player-only")); return true
+                }
+                plugin.configGui.open(p)
+            }
+            else -> sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history|verbose|replay|evidence|config>"))
         }
         return true
     }
@@ -117,10 +158,15 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): List<String> {
         if (!sender.hasPermission("novaguard.admin")) return emptyList()
         if (args.size == 1) return listOf("reload", "list", "toggle", "vl", "vlreset",
-            "alerts", "freeze", "wave", "wavelist", "reports", "history")
+            "alerts", "freeze", "wave", "wavelist", "reports", "history",
+            "verbose", "replay", "evidence", "config")
             .filter { it.startsWith(args[0].lowercase()) }
         if (args.size == 2 && args[0].equals("toggle", true))
             return plugin.checks.all.map { it.id }.filter { it.startsWith(args[1].lowercase()) }
+        if (args.size == 2 && (args[0].equals("verbose", true) || args[0].equals("replay", true)
+                    || args[0].equals("evidence", true)))
+            return Bukkit.getOnlinePlayers().map { it.name }
+                .filter { it.startsWith(args[1], true) }
         return emptyList()
     }
 }

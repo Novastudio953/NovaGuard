@@ -1,6 +1,7 @@
 package com.novaguard.check
 
 import com.novaguard.NovaGuard
+import com.novaguard.checks.AdvancedChecks
 import com.novaguard.checks.BlockChecks
 import com.novaguard.checks.CombatChecks
 import com.novaguard.checks.ExtraChecks
@@ -20,6 +21,7 @@ class CheckManager(private val plugin: NovaGuard) {
         PlayerChecks.registerAll(plugin, ::register)
         ExtraChecks.registerAll(plugin, ::register)
         MacroChecks.registerAll(plugin, ::register)
+        AdvancedChecks.registerAll(plugin, ::register)
         plugin.xray.registerHook(::register)
     }
 

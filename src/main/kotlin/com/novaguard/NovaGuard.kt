@@ -1,6 +1,7 @@
 package com.novaguard
 
 import com.novaguard.alert.AlertManager
+import com.novaguard.api.NovaGuardAPI
 import com.novaguard.check.CheckManager
 import com.novaguard.checks.ExtraChecks
 import com.novaguard.command.GuardCommand
@@ -14,7 +15,11 @@ import com.novaguard.listener.ExtraListener
 import com.novaguard.listener.MoveListener
 import com.novaguard.listener.PlayerListener
 import com.novaguard.punish.PunishmentManager
+import com.novaguard.staff.ConfigGui
+import com.novaguard.staff.EvidenceRecorder
 import com.novaguard.staff.StaffTools
+import com.novaguard.staff.VerboseManager
+import com.novaguard.update.UpdateChecker
 import com.novaguard.xray.XrayManager
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -31,6 +36,14 @@ class NovaGuard : JavaPlugin() {
     lateinit var punishments: PunishmentManager
         private set
     lateinit var staff: StaffTools
+        private set
+    lateinit var verbose: VerboseManager
+        private set
+    lateinit var evidence: EvidenceRecorder
+        private set
+    lateinit var configGui: ConfigGui
+        private set
+    lateinit var updater: UpdateChecker
         private set
     lateinit var configs: ConfigManager
         private set
@@ -65,16 +78,26 @@ class NovaGuard : JavaPlugin() {
         alerts = AlertManager(this)
         punishments = PunishmentManager(this)
         staff = StaffTools(this)
+        verbose = VerboseManager(this)
+        evidence = EvidenceRecorder(this)
+        configGui = ConfigGui(this)
+        updater = UpdateChecker(this)
         checks.load()
         alerts.load()
         punishments.load()
+        verbose.load()
+        evidence.load()
+        updater.load()
         xray.start()
+        updater.start()
+        NovaGuardAPI.init(this)
 
         server.pluginManager.registerEvents(MoveListener(this), this)
         server.pluginManager.registerEvents(CombatListener(this), this)
         server.pluginManager.registerEvents(BlockListener(this), this)
         server.pluginManager.registerEvents(PlayerListener(this), this)
         server.pluginManager.registerEvents(ExtraListener(this), this)
+        server.pluginManager.registerEvents(updater, this)
 
         val cmd = GuardCommand(this)
         getCommand("novaguard")?.setExecutor(cmd)

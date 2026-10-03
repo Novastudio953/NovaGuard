@@ -281,6 +281,43 @@ checks:
       - "aristois"
       - "lambda"
       - "bleachhack"
+  # ---------- wave-3 checks (1.7.0) ----------
+  strafe:
+    enabled: true
+    max-vl: 10.0
+    punishment: "kick {player} Unfair advantage (Strafe)"
+    ban-command: "ban {player} Cheating (Strafe)"
+    ban-vl-multiplier: 3.0
+  groundspoof:
+    enabled: true
+    max-vl: 10.0
+    punishment: "kick {player} Unfair advantage (GroundSpoof)"
+    ban-command: "ban {player} Cheating (GroundSpoof)"
+    ban-vl-multiplier: 3.0
+  autoarmor:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (AutoArmor)"
+    ban-command: "ban {player} Cheating (AutoArmor)"
+    ban-vl-multiplier: 3.0
+  autotool:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (AutoTool)"
+    ban-command: "ban {player} Cheating (AutoTool)"
+    ban-vl-multiplier: 3.0
+  regen:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (Regen)"
+    ban-command: "ban {player} Cheating (Regen)"
+    ban-vl-multiplier: 3.0
+  aimbot:
+    enabled: true
+    max-vl: 10.0
+    punishment: "kick {player} Unfair advantage (Aimbot)"
+    ban-command: "ban {player} Cheating (Aimbot)"
+    ban-vl-multiplier: 3.0
 
 # ============================================================
 # Anti-Xray — works even against X-ray texture packs

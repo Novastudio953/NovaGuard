@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.EntityRegainHealthEvent
 
 class CombatListener(private val plugin: NovaGuard) : Listener {
 
@@ -53,6 +54,20 @@ class CombatListener(private val plugin: NovaGuard) : Listener {
         }
         (plugin.checks.get("clicksignature") as? com.novaguard.checks.MacroChecks.ClickSignature)?.let {
             if (it.enabled) it.onAction(p, d)
+        }
+        // wave-3 combat checks
+        (plugin.checks.get("aimbot") as? com.novaguard.checks.AdvancedChecks.Aimbot)?.let {
+            if (it.enabled) it.onAttack(p, target, d, 350)
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    fun onRegain(e: EntityRegainHealthEvent) {
+        val p = e.entity as? Player ?: return
+        val d = plugin.data.get(p.uniqueId)
+        if (d.isExempt(p)) return
+        (plugin.checks.get("regen") as? com.novaguard.checks.AdvancedChecks.Regen)?.let {
+            if (it.enabled) it.onRegain(e, p, d)
         }
     }
 

@@ -35,6 +35,18 @@ settings:
   lag-shield:
     enabled: true
     tps-threshold: 18.0
+  # verbose mode: /novaguard verbose <player> streams live detections to staff
+  verbose:
+    enabled: true
+  # evidence recorder: rolling movement buffer for /novaguard replay
+  evidence:
+    enabled: true
+    record-seconds: 20
+  # update checker: compare against latest GitHub release, notify staff
+  update-checker:
+    enabled: true
+  # message language: en (default), es (Español), tl (Tagalog)
+  language: en
 
 # ============================================================
 # Bedrock (Geyser/Floodgate) leniency
@@ -58,6 +70,8 @@ bedrock:
     - elytra
     - boatfly
     - noslow
+    - strafe
+    - groundspoof
     - sprintcheck
     - derp
     - baritone

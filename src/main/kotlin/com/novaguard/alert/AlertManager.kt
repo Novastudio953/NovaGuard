@@ -57,6 +57,8 @@ class AlertManager(private val plugin: NovaGuard) {
         if (plugin.config.getBoolean("settings.log-to-console", true)) {
             plugin.logger.info("[ALERT] ${player.name} failed ${check.displayName} (VL ${"%.1f".format(vl)}) $info")
         }
+        // verbose mode: staff watching this player get a live line
+        plugin.verbose.onFlag(player, check, vl, info)
     }
 
     private fun safePing(p: Player): Int = try { p.ping } catch (_: Exception) { -1 }

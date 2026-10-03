@@ -58,6 +58,9 @@ class PlayerListener(private val plugin: NovaGuard) : Listener {
     fun onQuit(e: PlayerQuitEvent) {
         plugin.punishments.clearCooldowns(e.player.uniqueId)
         plugin.data.remove(e.player.uniqueId)
+        plugin.evidence.clear(e.player.uniqueId)
+        plugin.evidence.stopReplay(e.player.uniqueId)
+        plugin.verbose.stopWatching(e.player.uniqueId)
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -98,6 +101,9 @@ class PlayerListener(private val plugin: NovaGuard) : Listener {
         if (d.isExempt(p)) return
         (plugin.checks.get("fasteat") as? BlockChecks.FastEat)?.let {
             if (it.enabled) it.onEat(p, d, e)
+        }
+        (plugin.checks.get("regen") as? com.novaguard.checks.AdvancedChecks.Regen)?.let {
+            if (it.enabled) it.onConsume(d, e.item.type)
         }
     }
 }

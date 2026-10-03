@@ -1,0 +1,73 @@
+# ============================================================
+# NovaGuard — Tagalog (tl)
+# Overrides messages.yml keys when settings.language: tl
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+# ---------- general ----------
+no-permission: "{prefix} &cWala kang pahintulot na gamitin ito."
+player-only: "{prefix} &cAng command na ito ay sa loob lang ng laro."
+player-not-online: "{prefix} &cAng player na iyon ay hindi online."
+reloaded: "{prefix} &aMatagumpay na na-reload ang configuration."
+usage: "{prefix} &7Gamit: &f{usage}"
+
+# ---------- checks ----------
+unknown-check: "{prefix} &cHindi kilalang check: &f{check}&c."
+check-toggled: "{prefix} &7Ang check na &f{check} &7ay {state} na ngayon."
+state-enabled: "&a&lBUKAS"
+state-disabled: "&c&lSARADO"
+
+# ---------- violations ----------
+vl-header: "{prefix} &7Talaan ng paglabag ni &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7ay malinis ang record."
+vl-cleared: "{prefix} &7Nabura ang lahat ng paglabag ni &f{player}&7."
+
+# ---------- alerts ----------
+alerts-on: "{prefix} &7Ang mga alert sa paglabag ay &abinuksan&7."
+alerts-off: "{prefix} &7Ang mga alert sa paglabag ay &csinara&7."
+alert-format: "{prefix} &f{player} &7ay nahuli sa &c{check} &8(&e{vl} VL&8)"
+
+# ---------- freeze ----------
+freeze-target-frozen: "{prefix} &cNa-freeze ka ng staff team. &7Huwag gumalaw at huwag mag-log out."
+freeze-target-unfrozen: "{prefix} &aNa-unfreeze ka na."
+freeze-staff-frozen: "{prefix} &f{player} &7ay &cna-freeze&7."
+freeze-staff-unfrozen: "{prefix} &f{player} &7ay &ana-unfreeze&7."
+
+# ---------- reports ----------
+report-usage: "{prefix} &7Gamit: &f/report <player> <dahilan>"
+report-self: "{prefix} &cHindi mo puwedeng i-report ang sarili mo."
+report-filed: "{prefix} &aNaisumite ang report. &7Susuriin ito ng staff."
+report-notify: "{prefix} &f{reporter} &7ay nag-report kay &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7Tinanggal ang report."
+
+# ---------- ban wave ----------
+wave-executed: "{prefix} &7Naipatupad ang ban wave — &c{count} &7player(s) ang tinanggal."
+wave-empty: "{prefix} &7Walang laman ang ban wave queue."
+wave-header: "{prefix} &7Mga player na naghihintay sa ban wave:"
+wave-kick: "&cNovaGuard Security\n\n&7Ang iyong account ay minarkahan para sa pagsusuri.\n&7Makipag-ugnayan sa staff sa aming Discord."
+wave-discord: "**NovaGuard** — naipatupad ang ban wave, {count} player(s) ang tinanggal."
+
+# ---------- punishment ----------
+punishment-broadcast: "{prefix} &f{player} &7ay tinanggal dahil sa &c{check}&7."
+punishment-discord: "**NovaGuard** — {player} pinarusahan: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} nakapila sa ban wave ({check}, {vl} VL)"
+
+# ---------- vpn ----------
+vpn-kick: "{prefix} &cHindi pinapayagan ang mga VPN, proxy at hosting service sa server na ito."
+
+# ---------- verbose ----------
+verbose-on: "{prefix} &7Bukas ang verbose para kay &f{player}&7 — dito lalabas ang mga live detection."
+verbose-off: "{prefix} &7Sarado na ang verbose para kay &f{player}&7."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+# ---------- evidence / replay ----------
+replay-start: "{prefix} &7Nire-replay ang huling &e{seconds}s&7 ng galaw ni &f{player}&7."
+replay-end: "{prefix} &7Tapos na ang replay kay &f{player}&7."
+replay-stopped: "{prefix} &7Itinigil ang replay."
+replay-none: "{prefix} &cWala pang naitalang galaw para kay &f{player}&c."
+evidence-info: "{prefix} &7Ebidensya para kay &f{player}&8: &e{samples} &7sample (&e{seconds}s&7)."
+
+# ---------- update checker ----------
+update-available: "{prefix} &eMay bagong bersyon ng NovaGuard: &fv{latest} &e(ikaw ay v{current}). &7Kunin sa &bgithub.com/Novastudio953/NovaGuard/releases"

@@ -27,6 +27,15 @@ abstract class Check(
         if (data.isExempt(player)) return
         if (plugin.bedrockLeniency && data.checkBedrock() && plugin.bedrockExempt.contains(id)) return
         val vl = data.addVl(id, vlAmount())
+        // developer API: allow other plugins to observe/cancel the flag
+        val event = com.novaguard.api.NovaGuardFlagEvent(player, this, vl, info)
+        try {
+            org.bukkit.Bukkit.getPluginManager().callEvent(event)
+        } catch (_: Exception) { }
+        if (event.isCancelled) {
+            data.setVl(id, vl - vlAmount()) // roll back the VL we just added
+            return
+        }
         val inGrace = plugin.graceEnabled && System.currentTimeMillis() < data.graceUntil
         data.addHistory(id, vl, if (inGrace) "$info [grace]" else info)
         plugin.alerts.alert(player, this, vl, if (inGrace) "$info [grace]" else info)
