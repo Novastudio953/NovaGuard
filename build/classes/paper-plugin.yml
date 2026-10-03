@@ -3,7 +3,7 @@ version: 1.6.0
 main: com.novaguard.NovaGuard
 api-version: '1.21'
 author: Nova Studio
-description: Original premium anti-cheat with 38 toggleable checks.
+description: Original premium anti-cheat with 44 toggleable checks.
 website: https://github.com/reach1234889
 softdepend: [floodgate, Geyser-Spigot]
 commands:
