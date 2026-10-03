@@ -54,3 +54,6 @@ wave-discord: "**NovaGuard** — ban wave executed, {count} player(s) removed."
 punishment-broadcast: "{prefix} &f{player} &7was removed for &c{check}&7."
 punishment-discord: "**NovaGuard** — {player} punished: `{command}`"
 wave-add-discord: "**NovaGuard** — {player} queued for ban wave ({check}, {vl} VL)"
+
+# ---------- vpn ----------
+vpn-kick: "{prefix} &cVPNs, proxies and hosting services are not allowed on this server."

@@ -22,6 +22,10 @@ settings:
   illegal-scan-seconds: 60
   # total VL across all checks before a player shows in /sus
   sus-vl-threshold: 5.0
+  # VPN/proxy/hosting blocker (free ip-api.com lookup, cached 6h, fails open)
+  vpn-block:
+    enabled: true
+    exempt-ips: []
 
 # ============================================================
 # Bedrock (Geyser/Floodgate) leniency

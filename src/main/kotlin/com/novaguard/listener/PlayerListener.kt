@@ -27,6 +27,21 @@ class PlayerListener(private val plugin: NovaGuard) : Listener {
     }
 
     @EventHandler
+    fun onPreLogin(e: org.bukkit.event.player.AsyncPlayerPreLoginEvent) {
+        if (!plugin.config.getBoolean("settings.vpn-block.enabled", false)) return
+        val ip = e.address?.hostAddress ?: return
+        if (plugin.config.getStringList("settings.vpn-block.exempt-ips").contains(ip)) return
+        if (com.novaguard.vpn.VpnBlocker.isBlocked(ip)) {
+            @Suppress("DEPRECATION")
+            e.disallow(
+                org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result.KICK_OTHER,
+                plugin.configs.msg("vpn-kick")
+            )
+            plugin.logger.info("[NovaGuard] Blocked VPN/proxy connection from $ip (${e.name})")
+        }
+    }
+
+    @EventHandler
     fun onJoin(e: PlayerJoinEvent) {
         val d = plugin.data.get(e.player.uniqueId) // ensure entry
         // warm the Bedrock cache early so first checks don't pay lookup cost
