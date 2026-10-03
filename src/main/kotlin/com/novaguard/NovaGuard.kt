@@ -50,6 +50,12 @@ class NovaGuard : JavaPlugin() {
 
     override fun onEnable() {
         saveDefaultConfig()
+        // Nova Studio license guard: author + jar signature verification
+        if (!com.novaguard.security.LicenseGuard.verify(this)) {
+            logger.severe("NovaGuard failed license verification and will now disable itself.")
+            server.pluginManager.disablePlugin(this)
+            return
+        }
         com.novaguard.support.BedrockSupport.init(this)
         configs = ConfigManager(this)
         configs.load()
@@ -100,6 +106,16 @@ class NovaGuard : JavaPlugin() {
         server.scheduler.runTaskTimerAsynchronously(this, Runnable {
             data.decayVls(config.getDouble("settings.vl-decay-per-minute", 1.0))
         }, 1200L, 1200L)
+
+        // license re-verification every 10 minutes
+        server.scheduler.runTaskTimerAsynchronously(this, Runnable {
+            if (!com.novaguard.security.LicenseGuard.verify(this)) {
+                logger.severe("NovaGuard license verification failed — disabling.")
+                server.scheduler.runTask(this, Runnable {
+                    server.pluginManager.disablePlugin(this)
+                })
+            }
+        }, 12000L, 12000L)
 
         // illegal item scanner (main thread: touches inventories)
         val scanSecs = config.getLong("settings.illegal-scan-seconds", 60)
