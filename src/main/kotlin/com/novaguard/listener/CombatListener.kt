@@ -47,6 +47,13 @@ class CombatListener(private val plugin: NovaGuard) : Listener {
         (plugin.checks.get("criticals") as? CombatChecks.Criticals)?.let {
             if (it.enabled) it.onAttack(p, d)
         }
+        // anti-macro action sampling
+        (plugin.checks.get("macro") as? com.novaguard.checks.MacroChecks.Macro)?.let {
+            if (it.enabled) it.onAction(p, d)
+        }
+        (plugin.checks.get("clicksignature") as? com.novaguard.checks.MacroChecks.ClickSignature)?.let {
+            if (it.enabled) it.onAction(p, d)
+        }
     }
 
     @EventHandler(ignoreCancelled = true)

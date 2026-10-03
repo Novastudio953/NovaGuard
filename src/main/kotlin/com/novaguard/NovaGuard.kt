@@ -71,6 +71,22 @@ class NovaGuard : JavaPlugin() {
         getCommand("sus")?.setExecutor(sus)
         getCommand("sus")?.tabCompleter = sus
 
+        // client brand detection (minecraft:brand channel)
+        server.messenger.registerIncomingPluginChannel(this, "minecraft:brand",
+            org.bukkit.plugin.messaging.PluginMessageListener { _, player, message ->
+                try {
+                    val brand = readBrand(message).take(64)
+                    val d = data.get(player.uniqueId)
+                    if (d.isExempt(player)) return@PluginMessageListener
+                    val check = checks.get("clientbrand") as? com.novaguard.checks.MacroChecks.ClientBrand
+                    if (check?.enabled == true) {
+                        server.scheduler.runTask(this, Runnable {
+                            if (player.isOnline) check.onBrand(player, d, brand.ifBlank { "unknown" })
+                        })
+                    } else d.clientBrand = brand.ifBlank { "unknown" }
+                } catch (_: Exception) { }
+            })
+
         // VL decay task
         server.scheduler.runTaskTimerAsynchronously(this, Runnable {
             data.decayVls(config.getDouble("settings.vl-decay-per-minute", 1.0))
@@ -92,8 +108,27 @@ class NovaGuard : JavaPlugin() {
     }
 
     override fun onDisable() {
+        try {
+            server.messenger.unregisterIncomingPluginChannel(this, "minecraft:brand")
+        } catch (_: Exception) { }
         data.clear()
         logger.info("NovaGuard disabled.")
+    }
+
+    /** Reads a VarInt-prefixed UTF string (the minecraft:brand payload format). */
+    private fun readBrand(bytes: ByteArray): String {
+        var numRead = 0
+        var result = 0
+        var idx = 0
+        do {
+            if (idx >= bytes.size) return "unknown"
+            val read = bytes[idx++].toInt()
+            result = result or ((read and 0b01111111) shl (7 * numRead))
+            numRead++
+            if (numRead > 5) return "unknown"
+        } while ((read and 0b10000000) != 0)
+        if (idx + result > bytes.size) return "unknown"
+        return bytes.copyOfRange(idx, idx + result).toString(Charsets.UTF_8)
     }
 
     fun reloadAll() {

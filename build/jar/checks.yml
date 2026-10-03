@@ -234,6 +234,53 @@ checks:
     punishment: "kick {player} Unfair advantage (Xray)"
     ban-command: "ban {player} Cheating (Xray)"
     ban-vl-multiplier: 3.0
+  # ---- anti-macro wave ----
+  macro:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (Macro)"
+    ban-command: "ban {player} Cheating (Macro)"
+    ban-vl-multiplier: 3.0
+  clicksignature:
+    enabled: true
+    max-vl: 5.0
+    punishment: "kick {player} Unfair advantage (AutoClicker)"
+    ban-command: "ban {player} Cheating (AutoClicker)"
+    ban-vl-multiplier: 3.0
+  afkmacro:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (AFK Macro)"
+    ban-command: "ban {player} Cheating (AFK Macro)"
+    ban-vl-multiplier: 3.0
+  invbot:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (Inventory Bot)"
+    ban-command: "ban {player} Cheating (Inventory Bot)"
+    ban-vl-multiplier: 3.0
+  chatmacro:
+    enabled: true
+    max-vl: 5.0
+    punishment: "mute {player} 1h Automated chat (Chat Macro)"
+    ban-command: "ban {player} Cheating (Chat Macro)"
+    ban-vl-multiplier: 3.0
+  clientbrand:
+    enabled: true
+    max-vl: 2.0
+    punishment: "kick {player} Prohibited client detected"
+    ban-command: "ban {player} Prohibited client"
+    ban-vl-multiplier: 3.0
+    # brand substrings (case-insensitive) that trigger the check
+    blocked:
+      - "wurst"
+      - "impact"
+      - "future"
+      - "rusherhack"
+      - "meteor"
+      - "aristois"
+      - "lambda"
+      - "bleachhack"
 
 # ============================================================
 # Anti-Xray — works even against X-ray texture packs

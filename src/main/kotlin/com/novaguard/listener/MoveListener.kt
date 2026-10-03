@@ -23,6 +23,8 @@ class MoveListener(private val plugin: NovaGuard) : Listener {
             // still run rotation-only checks
             val derp = plugin.checks.get("derp") as? com.novaguard.checks.ExtraChecks.Derp
             if (derp?.enabled == true && !d.isExempt(p)) derp.onMove(e, p, d)
+            val afk = plugin.checks.get("afkmacro") as? com.novaguard.checks.MacroChecks.AfkMacro
+            if (afk?.enabled == true && !d.isExempt(p)) afk.onMove(e, p, d)
             return
         }
         if (d.isExempt(p)) return
@@ -61,6 +63,9 @@ class MoveListener(private val plugin: NovaGuard) : Listener {
             if (it.enabled) it.onMove(e, p, d)
         }
         (plugin.checks.get("baritone") as? com.novaguard.checks.ExtraChecks.Baritone)?.let {
+            if (it.enabled) it.onMove(e, p, d)
+        }
+        (plugin.checks.get("afkmacro") as? com.novaguard.checks.MacroChecks.AfkMacro)?.let {
             if (it.enabled) it.onMove(e, p, d)
         }
     }

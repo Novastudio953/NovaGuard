@@ -39,6 +39,16 @@ class ExtraListener(private val plugin: NovaGuard) : Listener {
         }
         // ghost hand
         check<ExtraChecks.GhostHand>("ghosthand")?.onInteract(p, d, e)
+        // anti-macro action sampling (clicks / swings)
+        if (e.action == org.bukkit.event.block.Action.LEFT_CLICK_AIR ||
+            e.action == org.bukkit.event.block.Action.LEFT_CLICK_BLOCK) {
+            (plugin.checks.get("macro") as? com.novaguard.checks.MacroChecks.Macro)?.let {
+                if (it.enabled) it.onAction(p, d)
+            }
+            (plugin.checks.get("clicksignature") as? com.novaguard.checks.MacroChecks.ClickSignature)?.let {
+                if (it.enabled) it.onAction(p, d)
+            }
+        }
     }
 
     @EventHandler
@@ -97,6 +107,9 @@ class ExtraListener(private val plugin: NovaGuard) : Listener {
         if (d.isExempt(p)) return
         check<ExtraChecks.ChestStealer>("cheststealer")?.onTake(p, d, e)
         check<ExtraChecks.InventoryClicker>("inventoryclicker")?.onClick(p, d)
+        (plugin.checks.get("invbot") as? com.novaguard.checks.MacroChecks.InventoryBot)?.let {
+            if (it.enabled) it.onClick(p, d, e.slot)
+        }
         // totem equip tracking: totem moved to offhand (slot 40)
         if (e.currentItem?.type == Material.TOTEM_OF_UNDYING && e.slot == 40) {
             (plugin.checks.get("autototem") as? ExtraChecks.AutoTotem)?.let {
@@ -111,5 +124,28 @@ class ExtraListener(private val plugin: NovaGuard) : Listener {
         val d = plugin.data.get(p.uniqueId)
         if (d.isExempt(p)) return
         check<ExtraChecks.BookBan>("bookban")?.onEdit(p, d, e)
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    fun onChat(e: org.bukkit.event.player.AsyncPlayerChatEvent) {
+        val p = e.player
+        val d = plugin.data.get(p.uniqueId)
+        if (d.isExempt(p)) return
+        (plugin.checks.get("chatmacro") as? com.novaguard.checks.MacroChecks.ChatMacro)?.let {
+            if (it.enabled) it.onChat(p, d, e.message)
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    fun onCommand(e: org.bukkit.event.player.PlayerCommandPreprocessEvent) {
+        val p = e.player
+        val d = plugin.data.get(p.uniqueId)
+        if (d.isExempt(p)) return
+        // command macros (e.g. /home loop bots)
+        if (!e.message.startsWith("/novaguard", true) && !e.message.startsWith("/report", true)) {
+            (plugin.checks.get("chatmacro") as? com.novaguard.checks.MacroChecks.ChatMacro)?.let {
+                if (it.enabled) it.onChat(p, d, "cmd:" + e.message)
+            }
+        }
     }
 }

@@ -22,6 +22,7 @@ class PlayerData(val uuid: UUID) {
     @Volatile var inventoryOpen: Boolean = false
     @Volatile var alertsEnabled: Boolean = true
     @Volatile var frozen: Boolean = false
+    @Volatile var clientBrand: String = "unknown"
     @Volatile private var bedrockChecked: Boolean = false
     @Volatile var isBedrock: Boolean = false
 
