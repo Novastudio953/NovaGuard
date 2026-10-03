@@ -101,15 +101,15 @@ class NovaGuard : JavaPlugin() {
             data.decayVls(config.getDouble("settings.vl-decay-per-minute", 1.0))
         }, 1200L, 1200L)
 
-        // illegal item scanner
+        // illegal item scanner (main thread: touches inventories)
         val scanSecs = config.getLong("settings.illegal-scan-seconds", 60)
-        server.scheduler.runTaskTimerAsynchronously(this, Runnable {
+        server.scheduler.runTaskTimer(this, Runnable {
             val check = checks.get("illegals") as? ExtraChecks.IllegalItems ?: return@Runnable
             if (!check.enabled) return@Runnable
             for (p in server.onlinePlayers) {
                 val d = data.get(p.uniqueId)
                 if (d.isExempt(p)) continue
-                server.scheduler.runTask(this, Runnable { check.scan(p, d) })
+                check.scan(p, d)
             }
         }, scanSecs * 20, scanSecs * 20)
 

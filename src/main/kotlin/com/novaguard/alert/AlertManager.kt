@@ -90,6 +90,9 @@ class AlertManager(private val plugin: NovaGuard) {
         while (i < s.length) {
             if (s[i] == '§' && i + 1 < s.length) {
                 val code = s.substring(i, i + 2).lowercase()
+                if (code == "§r") {
+                    flush(); current = NamedTextColor.WHITE; bold = false; i += 2; continue
+                }
                 if (codes.containsKey(code)) {
                     flush()
                     val v = codes[code]!!
