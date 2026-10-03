@@ -16,7 +16,7 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
             return true
         }
         if (args.isEmpty()) {
-            sender.sendMessage("§8[§cNovaGuard§8] §7/novaguard <reload|list|toggle|vl|alerts>")
+            sender.sendMessage("§8[§cNovaGuard§8] §7/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history>")
             return true
         }
         when (args[0].lowercase()) {
@@ -70,6 +70,37 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
                 d.alertsEnabled = !d.alertsEnabled
                 sender.sendMessage("§7Alerts " + if (d.alertsEnabled) "§aON" else "§cOFF")
             }
+            "freeze" -> {
+                if (args.size < 2) { sender.sendMessage("§cUsage: /novaguard freeze <player>"); return true }
+                val target = Bukkit.getPlayer(args[1])
+                if (target == null) { sender.sendMessage("§cPlayer not online."); return true }
+                plugin.staff.toggleFreeze(sender as? org.bukkit.entity.Player ?: return true, target)
+            }
+            "wave" -> {
+                plugin.staff.banWave(sender)
+            }
+            "wavelist" -> {
+                if (plugin.staff.waveList.isEmpty()) { sender.sendMessage("§7Ban wave list is empty."); return true }
+                sender.sendMessage("§8[§cNovaGuard§8] §7Pending ban wave:")
+                plugin.staff.waveList.forEach { uuid ->
+                    sender.sendMessage("§7- §f${Bukkit.getOfflinePlayer(uuid).name ?: uuid}")
+                }
+            }
+            "reports" -> {
+                val p = sender as? org.bukkit.entity.Player ?: run {
+                    sender.sendMessage("§cPlayers only."); return true
+                }
+                plugin.staff.openReports(p)
+            }
+            "history" -> {
+                if (args.size < 2) { sender.sendMessage("§cUsage: /novaguard history <player>"); return true }
+                val p = sender as? org.bukkit.entity.Player ?: run {
+                    sender.sendMessage("§cPlayers only."); return true
+                }
+                val target = Bukkit.getPlayer(args[1])
+                if (target == null) { sender.sendMessage("§cPlayer not online."); return true }
+                plugin.staff.openHistory(p, target)
+            }
             else -> sender.sendMessage("§cUnknown subcommand.")
         }
         return true
@@ -77,7 +108,8 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
 
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): List<String> {
         if (!sender.hasPermission("novaguard.admin")) return emptyList()
-        if (args.size == 1) return listOf("reload", "list", "toggle", "vl", "vlreset", "alerts")
+        if (args.size == 1) return listOf("reload", "list", "toggle", "vl", "vlreset",
+            "alerts", "freeze", "wave", "wavelist", "reports", "history")
             .filter { it.startsWith(args[0].lowercase()) }
         if (args.size == 2 && args[0].equals("toggle", true))
             return plugin.checks.all.map { it.id }.filter { it.startsWith(args[1].lowercase()) }

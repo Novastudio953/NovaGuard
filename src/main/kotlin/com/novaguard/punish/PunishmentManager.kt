@@ -18,11 +18,21 @@ class PunishmentManager(private val plugin: NovaGuard) {
         broadcastPunishments = plugin.config.getBoolean("settings.broadcast-punishments", true)
     }
 
-    fun execute(player: Player, check: Check, template: String, vl: Double) {
+    fun execute(player: Player, check: Check, template: String, vl: Double, isBan: Boolean = false) {
         val key = "${player.uniqueId}:${check.id}"
         val now = System.currentTimeMillis()
         if (now - (cooldowns[key] ?: 0L) < cooldownSeconds * 1000) return
         cooldowns[key] = now
+
+        // ban-wave mode: defer bans into the wave list instead of banning now
+        if (isBan && plugin.config.getBoolean("settings.ban-wave-mode", false)) {
+            plugin.staff.waveList.add(player.uniqueId)
+            player.kickPlayer("§cFlagged by NovaGuard. Your case is pending review.")
+            plugin.logger.info("[PUNISH] ${player.name} added to ban wave (${check.displayName})")
+            com.novaguard.staff.DiscordHook.send(plugin,
+                "🌊 **${player.name}** added to ban wave (${check.displayName}, VL ${"%.1f".format(vl)})")
+            return
+        }
 
         val command = template
             .replace("{player}", player.name)
@@ -34,6 +44,8 @@ class PunishmentManager(private val plugin: NovaGuard) {
         Bukkit.getScheduler().runTask(plugin, Runnable {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command)
         })
+        com.novaguard.staff.DiscordHook.send(plugin,
+            "🔨 **${player.name}** punished: `$command`")
 
         if (broadcastPunishments) {
             val msg = plugin.config.getString("settings.punishment-broadcast",

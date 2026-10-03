@@ -12,9 +12,19 @@ class MoveListener(private val plugin: NovaGuard) : Listener {
     @EventHandler(ignoreCancelled = true)
     fun onMove(e: PlayerMoveEvent) {
         val to = e.to ?: return
-        if (e.from.x == to.x && e.from.y == to.y && e.from.z == to.z) return
         val p = e.player
         val d = plugin.data.get(p.uniqueId)
+        if (d.frozen) {
+            // allow looking around, block position changes
+            if (e.from.x != to.x || e.from.y != to.y || e.from.z != to.z) e.isCancelled = true
+            return
+        }
+        if (e.from.x == to.x && e.from.y == to.y && e.from.z == to.z) {
+            // still run rotation-only checks
+            val derp = plugin.checks.get("derp") as? com.novaguard.checks.ExtraChecks.Derp
+            if (derp?.enabled == true && !d.isExempt(p)) derp.onMove(e, p, d)
+            return
+        }
         if (d.isExempt(p)) return
         val maxPing = plugin.config.getInt("settings.lag-compensation-max-ping", 350)
 
@@ -37,5 +47,21 @@ class MoveListener(private val plugin: NovaGuard) : Listener {
         if (bad?.enabled == true) bad.onMove(e, p, d)
         val inv = plugin.checks.get("inventory") as? PlayerChecks.InventoryMove
         if (inv?.enabled == true) inv.onMove(e, p, d)
+        // wave-2 movement/player checks
+        (plugin.checks.get("noslow") as? com.novaguard.checks.ExtraChecks.NoSlow)?.let {
+            if (it.enabled) it.onMove(e, p, d)
+        }
+        (plugin.checks.get("sprintcheck") as? com.novaguard.checks.ExtraChecks.SprintCheck)?.let {
+            if (it.enabled) it.onMove(e, p, d)
+        }
+        (plugin.checks.get("boatfly") as? com.novaguard.checks.ExtraChecks.BoatFly)?.let {
+            if (it.enabled) it.onMove(e, p, d, maxPing)
+        }
+        (plugin.checks.get("derp") as? com.novaguard.checks.ExtraChecks.Derp)?.let {
+            if (it.enabled) it.onMove(e, p, d)
+        }
+        (plugin.checks.get("baritone") as? com.novaguard.checks.ExtraChecks.Baritone)?.let {
+            if (it.enabled) it.onMove(e, p, d)
+        }
     }
 }

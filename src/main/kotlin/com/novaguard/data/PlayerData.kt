@@ -5,6 +5,8 @@ import org.bukkit.entity.Player
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
+data class ViolationRecord(val checkId: String, val vl: Double, val time: Long, val info: String)
+
 /**
  * Per-player tracking state. Checks store their counters here
  * so Check instances stay stateless.
@@ -19,6 +21,18 @@ class PlayerData(val uuid: UUID) {
     @Volatile var lastTeleport: Long = 0L
     @Volatile var inventoryOpen: Boolean = false
     @Volatile var alertsEnabled: Boolean = true
+    @Volatile var frozen: Boolean = false
+
+    private val history = mutableListOf<ViolationRecord>()
+
+    fun addHistory(checkId: String, vl: Double, info: String) {
+        synchronized(history) {
+            history.add(ViolationRecord(checkId, vl, System.currentTimeMillis(), info))
+            if (history.size > 50) history.removeAt(0)
+        }
+    }
+
+    fun historySnapshot(): List<ViolationRecord> = synchronized(history) { history.toList() }
 
     fun addVl(checkId: String, amount: Double): Double {
         val vl = (vls[checkId] ?: 0.0) + amount

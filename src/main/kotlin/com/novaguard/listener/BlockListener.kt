@@ -34,5 +34,7 @@ class BlockListener(private val plugin: NovaGuard) : Listener {
         (plugin.checks.get("nuker") as? BlockChecks.Nuker)?.let {
             if (it.enabled) it.onBreak(p, d)
         }
+        // xray module
+        if (plugin.xray.check.enabled) plugin.xray.onBreak(p, d, e)
     }
 }

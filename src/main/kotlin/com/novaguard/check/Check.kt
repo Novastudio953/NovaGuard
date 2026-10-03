@@ -26,12 +26,13 @@ abstract class Check(
         if (!enabled) return
         if (data.isExempt(player)) return
         val vl = data.addVl(id, vlAmount())
+        data.addHistory(id, vl, info)
         plugin.alerts.alert(player, this, vl, info)
         if (vl >= maxVl * banVlMultiplier) {
-            plugin.punishments.execute(player, this, banCommand, vl)
+            plugin.punishments.execute(player, this, banCommand, vl, true)
             data.resetVl(id)
         } else if (vl >= maxVl) {
-            plugin.punishments.execute(player, this, punishment, vl)
+            plugin.punishments.execute(player, this, punishment, vl, false)
             data.setVl(id, maxVl * 0.5) // keep half so repeat offenders escalate
         }
     }

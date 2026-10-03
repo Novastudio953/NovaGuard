@@ -16,6 +16,12 @@ settings:
   vl-decay-per-minute: 1.0
   # players above this ping skip movement checks (lag compensation)
   lag-compensation-max-ping: 350
+  # Discord webhook URL for punishment alerts ("none" to disable)
+  discord-webhook: "none"
+  # ban-wave mode: bans are deferred into a wave list, run /novaguard wave to ban all at once
+  ban-wave-mode: false
+  # how often (seconds) inventories are scanned for illegal items
+  illegal-scan-seconds: 60
 
 # Per-check settings. enabled = toggle, max-vl = violations before
 # punishment, punishment = command at max-vl, ban-command = command
@@ -165,3 +171,102 @@ checks:
     punishment: "kick {player} Unfair advantage (PingSpoof)"
     ban-command: "ban {player} Cheating (PingSpoof)"
     ban-vl-multiplier: 3.0
+  # ---- wave 2 checks ----
+  crystalaura:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (CrystalAura)"
+    ban-command: "ban {player} Cheating (CrystalAura)"
+    ban-vl-multiplier: 3.0
+  autototem:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (AutoTotem)"
+    ban-command: "ban {player} Cheating (AutoTotem)"
+    ban-vl-multiplier: 3.0
+  fastbow:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (FastBow)"
+    ban-command: "ban {player} Cheating (FastBow)"
+    ban-vl-multiplier: 3.0
+  noslow:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (NoSlow)"
+    ban-command: "ban {player} Cheating (NoSlow)"
+    ban-vl-multiplier: 3.0
+  sprintcheck:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (Sprint)"
+    ban-command: "ban {player} Cheating (Sprint)"
+    ban-vl-multiplier: 3.0
+  boatfly:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (BoatFly)"
+    ban-command: "ban {player} Cheating (BoatFly)"
+    ban-vl-multiplier: 3.0
+  cheststealer:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (ChestStealer)"
+    ban-command: "ban {player} Cheating (ChestStealer)"
+    ban-vl-multiplier: 3.0
+  inventoryclicker:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (InventoryClicker)"
+    ban-command: "ban {player} Cheating (InventoryClicker)"
+    ban-vl-multiplier: 3.0
+  ghosthand:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (GhostHand)"
+    ban-command: "ban {player} Cheating (GhostHand)"
+    ban-vl-multiplier: 3.0
+  derp:
+    enabled: true
+    max-vl: 6.0
+    punishment: "kick {player} Unfair advantage (Derp)"
+    ban-command: "ban {player} Cheating (Derp)"
+    ban-vl-multiplier: 3.0
+  baritone:
+    enabled: true
+    max-vl: 30.0
+    punishment: "warn {player} Bot-like movement detected"
+    ban-command: "ban {player} Cheating (Baritone)"
+    ban-vl-multiplier: 3.0
+  bookban:
+    enabled: true
+    max-vl: 3.0
+    punishment: "kick {player} Exploit attempt (BookBan)"
+    ban-command: "ban {player} Exploiting (BookBan)"
+    ban-vl-multiplier: 3.0
+  illegals:
+    enabled: true
+    max-vl: 5.0
+    punishment: "kick {player} Illegal items detected"
+    ban-command: "ban {player} Illegal items"
+    ban-vl-multiplier: 3.0
+  xray:
+    enabled: true
+    max-vl: 8.0
+    punishment: "kick {player} Unfair advantage (Xray)"
+    ban-command: "ban {player} Cheating (Xray)"
+    ban-vl-multiplier: 3.0
+
+# ============================================================
+# Anti-Xray — works even against X-ray texture packs
+# ============================================================
+xray:
+  honeypots-enabled: true
+  honeypots-per-cycle: 12
+  honeypot-interval-minutes: 10
+  max-honeypots: 200
+  # alert when a player mines more diamonds than this per hour
+  max-diamonds-per-hour: 32
+  # flag when this share of mined valuables was never exposed to air
+  unexposed-ratio-threshold: 0.55
+  unexposed-min-sample: 20
