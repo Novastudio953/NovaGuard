@@ -103,6 +103,30 @@ All files generate with sane defaults on first run.
 
 ---
 
+## What you need to download
+
+### To run the plugin (server owners)
+| Download | Where to get it | Notes |
+|---|---|---|
+| `NovaGuard-1.8.0.jar` | [Releases page](https://github.com/Novastudio953/NovaGuard/releases) — always grab the version marked **Latest** | Drop into `plugins/` and restart |
+| Paper 1.21+ | [papermc.io](https://papermc.io/downloads/paper) | 1.21 through the latest 26.x builds work |
+| Java 21 | [Adoptium](https://adoptium.net/temurin/releases/?version=21) | The server must run on Java 21 |
+
+Optional:
+- **Discord webhook URL** — only if you want punishment alerts in Discord. Create one in your Discord channel settings (Integrations → Webhooks), then paste it as `discord-webhook` in `config.yml`. Leave it as `"none"` to disable.
+
+No database, no extra plugins, no paid dependencies — everything else the plugin needs is bundled inside the jar.
+
+### To build from source (developers)
+| Download | Where to get it | Notes |
+|---|---|---|
+| JDK 21 | [Adoptium](https://adoptium.net/temurin/releases/?version=21) | For compiling |
+| Kotlin 2.x compiler (`kotlinc`) | [Kotlin releases](https://github.com/JetBrains/kotlin/releases) | 2.1.x recommended |
+| Paper 1.21 API jar | [PaperMC Maven](https://repo.papermc.io/repository/maven-public/io/papermc/paper/paper-api/) or via Maven `io.papermc.paper:paper-api` | Compile-time only |
+| `kotlin-stdlib.jar`, `adventure-api.jar`, `adventure-key.jar`, `examination-api.jar` | Bundled with the Kotlin compiler and Paper API | Added to the compile classpath (see below) |
+
+---
+
 ## Installation
 
 1. Download the latest `NovaGuard-1.8.0.jar` from the releases page.
