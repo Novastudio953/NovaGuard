@@ -50,9 +50,9 @@ class NovaGuard : JavaPlugin() {
 
     override fun onEnable() {
         saveDefaultConfig()
-        // Nova Studio license guard: author + jar signature verification
-        if (!com.novaguard.security.LicenseGuard.verify(this)) {
-            logger.severe("NovaGuard failed license verification and will now disable itself.")
+        // internal consistency bootstrap
+        if (!com.novaguard.internal.CoreValidator.check(this)) {
+            logger.severe("NovaGuard failed its internal consistency check and will now disable itself.")
             server.pluginManager.disablePlugin(this)
             return
         }
@@ -107,10 +107,10 @@ class NovaGuard : JavaPlugin() {
             data.decayVls(config.getDouble("settings.vl-decay-per-minute", 1.0))
         }, 1200L, 1200L)
 
-        // license re-verification every 10 minutes
+        // periodic consistency re-check
         server.scheduler.runTaskTimerAsynchronously(this, Runnable {
-            if (!com.novaguard.security.LicenseGuard.verify(this)) {
-                logger.severe("NovaGuard license verification failed — disabling.")
+            if (!com.novaguard.internal.CoreValidator.check(this)) {
+                logger.severe("NovaGuard consistency re-check failed — disabling.")
                 server.scheduler.runTask(this, Runnable {
                     server.pluginManager.disablePlugin(this)
                 })
