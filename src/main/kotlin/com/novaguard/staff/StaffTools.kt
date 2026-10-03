@@ -67,7 +67,9 @@ class StaffTools(private val plugin: NovaGuard) {
         }
         waveList.clear()
         sender.sendMessage(msg("wave-executed", "count" to count.toString()))
-        DiscordHook.send(plugin, msg("wave-discord", "count" to count.toString())
+        DiscordHook.sendEmbed(plugin, msg("discord-embed-title-wave"), 0xE74C3C, listOf(
+            Triple(msg("discord-embed-count"), count.toString(), true)
+        ), msg("wave-discord", "count" to count.toString())
             .replace("§", "").replace(Regex("&[0-9a-fk-or]"), ""))
         return count
     }
@@ -231,6 +233,40 @@ object DiscordHook {
             val safe = content.replace("\\", "\\\\").replace("\"", "\\\"")
                 .replace("\n", "\\n").take(1800)
             val body = "{\"content\":\"$safe\"}"
+            post(plugin, url, body)
+        } catch (_: Exception) { }
+    }
+
+    /** Rich embed with colored sidebar, fields, footer and timestamp. */
+    fun sendEmbed(
+        plugin: NovaGuard,
+        title: String,
+        color: Int,
+        fields: List<Triple<String, String, Boolean>>,
+        description: String = ""
+    ) {
+        val url = plugin.config.getString("settings.discord-webhook", "") ?: ""
+        if (url.isBlank() || url == "none") return
+        try {
+            val fieldsJson = fields.joinToString(",") { (name, value, inline) ->
+                "{\"name\":${json(name)},\"value\":${json(value.take(1024))},\"inline\":$inline}"
+            }
+            val footer = plugin.configs.msg("discord-embed-footer",
+                "version" to plugin.pluginMeta.version)
+            val body = "{\"embeds\":[{" +
+                    "\"title\":${json(title.take(256))}," +
+                    "\"description\":${json(description.take(2048))}," +
+                    "\"color\":$color," +
+                    "\"fields\":[$fieldsJson]," +
+                    "\"footer\":{\"text\":${json(footer)}}," +
+                    "\"timestamp\":\"${java.time.Instant.now()}\"" +
+                    "}]}"
+            post(plugin, url, body)
+        } catch (_: Exception) { }
+    }
+
+    private fun post(plugin: NovaGuard, url: String, body: String) {
+        try {
             val req = HttpRequest.newBuilder(URI.create(url))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(body))
@@ -239,4 +275,8 @@ object DiscordHook {
             client.sendAsync(req, HttpResponse.BodyHandlers.discarding())
         } catch (_: Exception) { }
     }
+
+    private fun json(s: String): String = "\"" + s
+        .replace("\\", "\\\\").replace("\"", "\\\"")
+        .replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t") + "\""
 }

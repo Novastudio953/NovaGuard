@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — ภาษาไทย (th)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cคุณไม่มีสิทธิ์ใช้คำสั่งนี้"
+player-only: "{prefix} &cคำสั่งนี้ใช้ได้เฉพาะในเกมเท่านั้น"
+player-not-online: "{prefix} &cผู้เล่นคนนั้นไม่ได้ออนไลน์อยู่"
+reloaded: "{prefix} &aโหลดการตั้งค่าใหม่สำเร็จ"
+usage: "{prefix} &7วิธีใช้: &f{usage}"
+
+unknown-check: "{prefix} &cไม่รู้จักเช็ค: &f{check}&c"
+check-toggled: "{prefix} &7เช็ค &f{check} &7ตอนนี้ {state}"
+state-enabled: "&a&lเปิด"
+state-disabled: "&c&lปิด"
+
+vl-header: "{prefix} &7ประวัติการทำผิดของ &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7มีประวัติสะอาด"
+vl-cleared: "{prefix} &7ล้างการทำผิดทั้งหมดของ &f{player} &7แล้ว"
+
+alerts-on: "{prefix} &7เปิด&7การแจ้งเตือนการทำผิด &aแล้ว&7"
+alerts-off: "{prefix} &7ปิด&7การแจ้งเตือนการทำผิด &cแล้ว&7"
+alert-format: "{prefix} &f{player} &7ถูกตรวจพบ &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &cคุณถูกทีมงานแช่แข็ง &7กรุณาอยู่นิ่งๆ และอย่าออกจากเกม"
+freeze-target-unfrozen: "{prefix} &aคุณถูกยกเลิกการแช่แข็งแล้ว"
+freeze-staff-frozen: "{prefix} &f{player} &7ถูก&cแช่แข็ง&7แล้ว"
+freeze-staff-unfrozen: "{prefix} &f{player} &7ถูก&aยกเลิกการแช่แข็ง&7แล้ว"
+
+report-usage: "{prefix} &7วิธีใช้: &f/report <ผู้เล่น> <เหตุผล>"
+report-self: "{prefix} &cคุณไม่สามารถรายงานตัวเองได้"
+report-filed: "{prefix} &aส่งรายงานแล้ว &7ทีมงานจะตรวจสอบเร็วๆ นี้"
+report-notify: "{prefix} &f{reporter} &7รายงาน &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7ปฏิเสธรายงานแล้ว"
+
+wave-executed: "{prefix} &7ดำเนินการแบนเป็นชุดแล้ว — ลบผู้เล่น &c{count} &7คน"
+wave-empty: "{prefix} &7คิวแบนเป็นชุดว่างอยู่"
+wave-header: "{prefix} &7ผู้เล่นที่รอแบนเป็นชุด:"
+wave-kick: "&cความปลอดภัย NovaGuard\n\n&7บัญชีของคุณถูกทำเครื่องหมายเพื่อตรวจสอบ\n&7กรุณาติดต่อทีมงานทาง Discord ของเรา"
+wave-discord: "**NovaGuard** — ดำเนินการแบนเป็นชุดแล้ว ลบ {count} คน"
+
+punishment-broadcast: "{prefix} &f{player} &7ถูกลบออกเพราะ &c{check}&7"
+punishment-discord: "**NovaGuard** — {player} ถูกลงโทษ: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} เข้าคิวแบนเป็นชุด ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cเซิร์ฟเวอร์นี้ไม่อนุญาตให้ใช้ VPN พร็อกซี และโฮสติ้ง"
+
+verbose-on: "{prefix} &7เปิด verbose สำหรับ &f{player} &7แล้ว — การตรวจจับจะแสดงที่นี่"
+verbose-off: "{prefix} &7ปิด verbose สำหรับ &f{player} &7แล้ว"
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &7กำลังเล่นซ้ำการเคลื่อนไหว &e{seconds} &7วินาทีล่าสุดของ &f{player}&7"
+replay-end: "{prefix} &7เล่นซ้ำของ &f{player} &7เสร็จแล้ว"
+replay-stopped: "{prefix} &7หยุดเล่นซ้ำแล้ว"
+replay-none: "{prefix} &cยังไม่มีข้อมูลการเคลื่อนไหวของ &f{player}&c"
+evidence-info: "{prefix} &7หลักฐานของ &f{player}&8: &e{samples} &7ตัวอย่าง (&e{seconds}วินาที&7)"
+
+update-available: "{prefix} &eมี NovaGuard เวอร์ชันใหม่: &fv{latest} &e(คุณใช้ v{current}) &7ดาวน์โหลดที่ &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7ตั้งค่าภาษาข้อความเป็น &f{lang} &7แล้ว"
+lang-unknown: "{prefix} &cไม่รู้จักภาษา: &f{lang}&c ที่มี: &f{list}"
+lang-current: "{prefix} &7ภาษาปัจจุบัน: &f{lang}&7 ที่มี: &f{list}"
+
+discord-embed-title-punish: "ผู้เล่นถูกลงโทษ"
+discord-embed-title-wave: "ดำเนินการแบนเป็นชุดแล้ว"
+discord-embed-title-queue: "เข้าคิวแบนเป็นชุด"
+discord-embed-player: "ผู้เล่น"
+discord-embed-check: "เช็ค"
+discord-embed-vl: "VL"
+discord-embed-command: "คำสั่ง"
+discord-embed-count: "ผู้เล่น"
+discord-embed-footer: "NovaGuard v{version}"

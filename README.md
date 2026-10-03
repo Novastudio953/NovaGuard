@@ -2,7 +2,7 @@
 
 A high-performance anti-cheat for **Paper 1.21 through the latest release** servers, crafted by **Nova Studio**.
 
-[![Version](https://img.shields.io/badge/version-1.7.0-blue)](https://github.com/Novastudio953/NovaGuard/releases)
+[![Version](https://img.shields.io/badge/version-1.8.0-blue)](https://github.com/Novastudio953/NovaGuard/releases)
 [![Paper](https://img.shields.io/badge/paper-1.21%E2%80%93latest-orange)](https://papermc.io)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.x-purple)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -35,9 +35,9 @@ Honeypot ores hidden inside solid rock, unexposed-ore ratio tracking, and diamon
 - `/novaguard config` — toggle checks in-game via GUI
 - Ban waves — queue bans and execute them all at once
 - Player reports (`/report`), violation history, click-to-teleport alerts
-- Discord webhook notifications
+- Discord webhook notifications — rich embeds with color, fields and timestamps
 - Update checker — staff are notified when a new release drops
-- Multi-language messages — English, Español, Tagalog (`settings.language`)
+- Multi-language messages — 21 languages (`settings.language` or `/novaguard lang`): English (default), Español, Tagalog, Français, Deutsch, Português, Русский, 中文, 日本語， 한국어, العربية, हिन्दी, Indonesia, Italiano, Nederlands, Polski, Türkçe, Українська, Tiếng Việt, ไทย, Melayu
 
 ### Developer API
 Other plugins can observe or cancel detections:
@@ -105,7 +105,7 @@ All files generate with sane defaults on first run.
 
 ## Installation
 
-1. Download the latest `NovaGuard-1.7.0.jar` from the releases page.
+1. Download the latest `NovaGuard-1.8.0.jar` from the releases page.
 2. Drop it into your server's `plugins/` folder.
 3. Restart the server. Configuration files generate automatically.
 
@@ -125,7 +125,7 @@ kotlinc -no-stdlib -no-reflect \
 
 # add resources, shade the Kotlin stdlib, and package
 cp -r src/main/resources/* build/classes/
-jar cf NovaGuard-1.7.0.jar -C build/classes .
+jar cf NovaGuard-1.8.0.jar -C build/classes .
 ```
 
 ---

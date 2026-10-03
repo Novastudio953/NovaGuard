@@ -40,9 +40,13 @@ class PunishmentManager(private val plugin: NovaGuard) {
             plugin.staff.waveList.add(player.uniqueId)
             player.kickPlayer(plugin.configs.msg("wave-kick"))
             plugin.logger.info("[PUNISH] ${player.name} added to ban wave (${check.displayName})")
-            com.novaguard.staff.DiscordHook.send(plugin,
-                plugin.configs.msg("wave-add-discord", "player" to player.name,
-                    "check" to check.displayName, "vl" to "%.1f".format(vl)))
+            val L = plugin.configs
+            com.novaguard.staff.DiscordHook.sendEmbed(plugin,
+                L.msg("discord-embed-title-queue"), 0xF5A623, listOf(
+                    Triple(L.msg("discord-embed-player"), player.name, true),
+                    Triple(L.msg("discord-embed-check"), check.displayName, true),
+                    Triple(L.msg("discord-embed-vl"), "%.1f".format(vl), true)
+                ))
             return
         }
 
@@ -56,8 +60,15 @@ class PunishmentManager(private val plugin: NovaGuard) {
         Bukkit.getScheduler().runTask(plugin, Runnable {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command)
         })
-        com.novaguard.staff.DiscordHook.send(plugin,
-            plugin.configs.msg("punishment-discord", "player" to player.name, "command" to command))
+        val L = plugin.configs
+        val color = if (isBan) 0xE74C3C else 0xF5A623
+        com.novaguard.staff.DiscordHook.sendEmbed(plugin,
+            L.msg("discord-embed-title-punish"), color, listOf(
+                Triple(L.msg("discord-embed-player"), player.name, true),
+                Triple(L.msg("discord-embed-check"), check.displayName, true),
+                Triple(L.msg("discord-embed-vl"), "%.1f".format(vl), true),
+                Triple(L.msg("discord-embed-command"), "`$command`", false)
+            ))
 
         if (broadcastPunishments) {
             val msg = plugin.configs.msg("punishment-broadcast",

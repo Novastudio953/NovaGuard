@@ -45,7 +45,8 @@ settings:
   # update checker: compare against latest GitHub release, notify staff
   update-checker:
     enabled: true
-  # message language: en (default), es (Español), tl (Tagalog)
+  # message language (default en). 21 bundled: en es tl fr de pt ru zh ja ko
+  # ar hi id it nl pl tr uk vi th ms — switch live with /novaguard lang <code>
   language: en
 
 # ============================================================

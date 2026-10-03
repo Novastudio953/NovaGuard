@@ -180,11 +180,11 @@ object AdvancedChecks {
             if (dist < 1.0 || dist > 6.0) return
             // required yaw to face the target
             val reqYaw = Math.toDegrees(atan2(-dx, dz))
-            var yawDiff = abs(((eye.yaw - reqYaw + 540) % 360) - 180)
+            val yawDiff = abs(((eye.yaw - reqYaw + 540) % 360) - 180)
             // inhuman snap: huge rotation right before the hit
             val sinceRot = System.currentTimeMillis() - d.getLong("aim_time")
             val lastYaw = d.getDouble("aim_yaw")
-            var snap = abs(((eye.yaw - lastYaw + 540) % 360) - 180)
+            val snap = abs(((eye.yaw - lastYaw + 540) % 360) - 180)
             if (sinceRot < 120 && snap > 80) {
                 flag(p, d, "snap ${"%.0f".format(snap)}° in ${sinceRot}ms")
                 return

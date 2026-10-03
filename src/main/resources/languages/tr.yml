@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — Türkçe (tr)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cBunu kullanma yetkin yok."
+player-only: "{prefix} &cBu komut yalnızca oyun içinde kullanılabilir."
+player-not-online: "{prefix} &cBu oyuncu şu anda çevrimiçi değil."
+reloaded: "{prefix} &aYapılandırma başarıyla yeniden yüklendi."
+usage: "{prefix} &7Kullanım: &f{usage}"
+
+unknown-check: "{prefix} &cBilinmeyen kontrol: &f{check}&c."
+check-toggled: "{prefix} &7Kontrol &f{check} &7şu an {state}."
+state-enabled: "&a&lAÇIK"
+state-disabled: "&c&lKAPALI"
+
+vl-header: "{prefix} &f{player} &7adlı oyuncunun ihlal kaydı:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7temiz bir kayda sahip."
+vl-cleared: "{prefix} &f{player} &7adlı oyuncunun ihlalleri temizlendi."
+
+alerts-on: "{prefix} &7İhlal uyarıları &aaçıldı&7."
+alerts-off: "{prefix} &7İhlal uyarıları &ckapatıldı&7."
+alert-format: "{prefix} &f{player} &c{check} &8(&e{vl} VL&8) &7nedeniyle yakalandı"
+
+freeze-target-frozen: "{prefix} &cYetkili ekip tarafından donduruldun. &7Kıpırdamadan dur ve çıkış yapma."
+freeze-target-unfrozen: "{prefix} &aDondurman kaldırıldı."
+freeze-staff-frozen: "{prefix} &f{player} &cdonduruldu&7."
+freeze-staff-unfrozen: "{prefix} &f{player} &7adlı oyuncunun dondurması &akaldırıldı&7."
+
+report-usage: "{prefix} &7Kullanım: &f/report <oyuncu> <sebep>"
+report-self: "{prefix} &cKendini rapor edemezsin."
+report-filed: "{prefix} &aRapor gönderildi. &7Ekip yakında inceleyecek."
+report-notify: "{prefix} &f{reporter}, &f{target} &7adlı oyuncuyu rapor etti&8: &f{reason}"
+report-dismissed: "{prefix} &7Rapor reddedildi."
+
+wave-executed: "{prefix} &7Ban dalgası uygulandı — &c{count} &7oyuncu uzaklaştırıldı."
+wave-empty: "{prefix} &7Ban dalgası kuyruğu boş."
+wave-header: "{prefix} &7Dalga bekleyen oyuncular:"
+wave-kick: "&cNovaGuard Güvenlik\n\n&7Hesabın inceleme için işaretlendi.\n&7Lütfen Discord üzerinden ekiple iletişime geç."
+wave-discord: "**NovaGuard** — ban dalgası uygulandı, {count} oyuncu uzaklaştırıldı."
+
+punishment-broadcast: "{prefix} &f{player}, &c{check} &7nedeniyle uzaklaştırıldı."
+punishment-discord: "**NovaGuard** — {player} cezalandırıldı: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} dalga kuyruğunda ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cBu sunucuda VPN, proxy ve hosting servislerine izin verilmez."
+
+verbose-on: "{prefix} &f{player} &7için verbose açıldı — canlı tespitler burada görünecek."
+verbose-off: "{prefix} &f{player} &7için verbose kapatıldı."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &f{player} &7adlı oyuncunun son &e{seconds} &7saniyelik hareketi oynatılıyor."
+replay-end: "{prefix} &f{player} &7için tekrar sona erdi."
+replay-stopped: "{prefix} &7Tekrar durduruldu."
+replay-none: "{prefix} &f{player} &7için henüz hareket verisi yok."
+evidence-info: "{prefix} &f{player} &7için kanıt&8: &e{samples} &7örnek (&e{seconds}sn&7)."
+
+update-available: "{prefix} &eYeni NovaGuard sürümü mevcut: &fv{latest} &e(sende v{current} var). &7İndir: &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7Mesaj dili &f{lang} &7olarak ayarlandı."
+lang-unknown: "{prefix} &cBilinmeyen dil: &f{lang}&c. Mevcut: &f{list}"
+lang-current: "{prefix} &7Mevcut dil: &f{lang}&7. Mevcut: &f{list}"
+
+discord-embed-title-punish: "Oyuncu Cezalandırıldı"
+discord-embed-title-wave: "Ban Dalgası Uygulandı"
+discord-embed-title-queue: "Dalga Kuyruğunda"
+discord-embed-player: "Oyuncu"
+discord-embed-check: "Kontrol"
+discord-embed-vl: "VL"
+discord-embed-command: "Komut"
+discord-embed-count: "Oyuncu"
+discord-embed-footer: "NovaGuard v{version}"

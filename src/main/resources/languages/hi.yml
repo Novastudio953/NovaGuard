@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — हिन्दी (hi)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cइसे उपयोग करने की अनुमति नहीं है।"
+player-only: "{prefix} &cयह कमांड केवल गेम में उपयोग हो सकती है।"
+player-not-online: "{prefix} &cवह खिलाड़ी ऑनलाइन नहीं है।"
+reloaded: "{prefix} &aकॉन्फ़िगरेशन सफलतापूर्वक रीलोड हुआ।"
+usage: "{prefix} &7उपयोग: &f{usage}"
+
+unknown-check: "{prefix} &cअज्ञात चेक: &f{check}&c।"
+check-toggled: "{prefix} &7चेक &f{check} &7अब {state} है।"
+state-enabled: "&a&lचालू"
+state-disabled: "&c&lबंद"
+
+vl-header: "{prefix} &f{player} &7का उल्लंघन रिकॉर्ड:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7का रिकॉर्ड साफ है।"
+vl-cleared: "{prefix} &f{player} &7के सभी उल्लंघन साफ किए गए।"
+
+alerts-on: "{prefix} &7उल्लंघन अलर्ट &aचालू&7।"
+alerts-off: "{prefix} &7उल्लंघन अलर्ट &cबंद&7।"
+alert-format: "{prefix} &f{player} &7पकड़ा गया: &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &cस्टाफ ने आपको फ्रीज़ किया है। &7स्थिर रहें और लॉग आउट न करें।"
+freeze-target-unfrozen: "{prefix} &aआप अनफ्रीज़ हो गए हैं।"
+freeze-staff-frozen: "{prefix} &f{player} &7को &cफ्रीज़&7 किया गया।"
+freeze-staff-unfrozen: "{prefix} &f{player} &7को &aअनफ्रीज़&7 किया गया।"
+
+report-usage: "{prefix} &7उपयोग: &f/report <खिलाड़ी> <कारण>"
+report-self: "{prefix} &cआप खुद की रिपोर्ट नहीं कर सकते।"
+report-filed: "{prefix} &aरिपोर्ट जमा हुई। &7स्टाफ जल्द समीक्षा करेगा।"
+report-notify: "{prefix} &f{reporter} &7ने &f{target} &7की रिपोर्ट की&8: &f{reason}"
+report-dismissed: "{prefix} &7रिपोर्ट खारिज की गई।"
+
+wave-executed: "{prefix} &7बैन वेव निष्पादित — &c{count} &7खिलाड़ी हटाए गए।"
+wave-empty: "{prefix} &7बैन वेव कतार खाली है।"
+wave-header: "{prefix} &7बैन वेव की प्रतीक्षा में खिलाड़ी:"
+wave-kick: "&cNovaGuard सुरक्षा\n\n&7आपका खाता समीक्षा हेतु चिह्नित हुआ है।\n&7कृपया हमारे Discord पर स्टाफ से संपर्क करें।"
+wave-discord: "**NovaGuard** — बैन वेव निष्पादित, {count} खिलाड़ी हटाए गए।"
+
+punishment-broadcast: "{prefix} &f{player} &7को &c{check} &7के कारण हटाया गया।"
+punishment-discord: "**NovaGuard** — {player} दंडित: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} बैन वेव कतार में ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cइस सर्वर पर VPN, प्रॉक्सी और होस्टिंग सेवाएं अनुमत नहीं हैं।"
+
+verbose-on: "{prefix} &f{player} &7के लिए वर्बोज़ चालू — लाइव डिटेक्शन यहां दिखेंगे।"
+verbose-off: "{prefix} &f{player} &7के लिए वर्बोज़ बंद।"
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &f{player} &7के पिछले &e{seconds}सेकंड &7की मूवमेंट replay हो रही है।"
+replay-end: "{prefix} &f{player} &7का replay समाप्त।"
+replay-stopped: "{prefix} &7Replay रोका गया।"
+replay-none: "{prefix} &f{player} &7का अभी कोई मूवमेंट डेटा नहीं।"
+evidence-info: "{prefix} &f{player} &7के साक्ष्य&8: &e{samples} &7नमूने (&e{seconds}से&7)।"
+
+update-available: "{prefix} &eNovaGuard का नया संस्करण उपलब्ध: &fv{latest} &e(आपके पास v{current})। &7यहां से लें: &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7संदेश भाषा &f{lang} &7पर सेट हुई।"
+lang-unknown: "{prefix} &cअज्ञात भाषा: &f{lang}&c। उपलब्ध: &f{list}"
+lang-current: "{prefix} &7वर्तमान भाषा: &f{lang}&7। उपलब्ध: &f{list}"
+
+discord-embed-title-punish: "खिलाड़ी दंडित"
+discord-embed-title-wave: "बैन वेव निष्पादित"
+discord-embed-title-queue: "बैन वेव कतार में"
+discord-embed-player: "खिलाड़ी"
+discord-embed-check: "चेक"
+discord-embed-vl: "VL"
+discord-embed-command: "कमांड"
+discord-embed-count: "खिलाड़ी"
+discord-embed-footer: "NovaGuard v{version}"

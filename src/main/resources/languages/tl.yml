@@ -71,3 +71,19 @@ evidence-info: "{prefix} &7Ebidensya para kay &f{player}&8: &e{samples} &7sample
 
 # ---------- update checker ----------
 update-available: "{prefix} &eMay bagong bersyon ng NovaGuard: &fv{latest} &e(ikaw ay v{current}). &7Kunin sa &bgithub.com/Novastudio953/NovaGuard/releases"
+
+# ---------- language ----------
+lang-set: "{prefix} &7Ang wika ng mga mensahe ay itinakda sa &f{lang}&7."
+lang-unknown: "{prefix} &cHindi kilalang wika: &f{lang}&c. Available: &f{list}"
+lang-current: "{prefix} &7Kasalukuyang wika: &f{lang}&7. Available: &f{list}"
+
+# ---------- discord embeds ----------
+discord-embed-title-punish: "Pinarusahan ang Player"
+discord-embed-title-wave: "Naipatupad ang Ban Wave"
+discord-embed-title-queue: "Nakapila sa Ban Wave"
+discord-embed-player: "Player"
+discord-embed-check: "Check"
+discord-embed-vl: "VL"
+discord-embed-command: "Command"
+discord-embed-count: "Mga Player"
+discord-embed-footer: "NovaGuard v{version}"

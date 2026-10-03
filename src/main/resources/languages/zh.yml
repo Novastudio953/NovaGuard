@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — 简体中文 (zh)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &c你没有权限使用此命令。"
+player-only: "{prefix} &c此命令只能在游戏中使用。"
+player-not-online: "{prefix} &c该玩家当前不在线。"
+reloaded: "{prefix} &a配置重载成功。"
+usage: "{prefix} &7用法: &f{usage}"
+
+unknown-check: "{prefix} &c未知检测项: &f{check}&c."
+check-toggled: "{prefix} &7检测项 &f{check} &7现在{state}。"
+state-enabled: "&a&l已启用"
+state-disabled: "&c&l已禁用"
+
+vl-header: "{prefix} &7&f{player} &7的违规记录:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7记录良好。"
+vl-cleared: "{prefix} &7已清除 &f{player} &7的所有违规。"
+
+alerts-on: "{prefix} &7违规提醒&a已开启&7。"
+alerts-off: "{prefix} &7违规提醒&c已关闭&7。"
+alert-format: "{prefix} &f{player} &7触发 &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &c你已被管理团队冻结。&7请保持不动,不要退出。"
+freeze-target-unfrozen: "{prefix} &a你已被解冻。"
+freeze-staff-frozen: "{prefix} &f{player} &7已被&c冻结&7。"
+freeze-staff-unfrozen: "{prefix} &f{player} &7已被&c解冻&7。"
+
+report-usage: "{prefix} &7用法: &f/report <玩家> <原因>"
+report-self: "{prefix} &c你不能举报自己。"
+report-filed: "{prefix} &a举报已提交。&7管理员将尽快处理。"
+report-notify: "{prefix} &f{reporter} &7举报了 &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7举报已驳回。"
+
+wave-executed: "{prefix} &7封禁波已执行 — 共移除 &c{count} &7名玩家。"
+wave-empty: "{prefix} &7封禁波队列当前为空。"
+wave-header: "{prefix} &7等待封禁波的玩家:"
+wave-kick: "&cNovaGuard 安全\n\n&7你的账号已被标记审查。\n&7请前往我们的 Discord 联系管理员。"
+wave-discord: "**NovaGuard** — 封禁波已执行,移除了 {count} 名玩家。"
+
+punishment-broadcast: "{prefix} &f{player} &7因 &c{check} &7被移除。"
+punishment-discord: "**NovaGuard** — {player} 被处罚: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} 已加入封禁波队列 ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &c本服务器不允许使用 VPN、代理和机房 IP。"
+
+verbose-on: "{prefix} &7已为 &f{player} &7开启详细模式 — 实时检测将显示在这里。"
+verbose-off: "{prefix} &7已为 &f{player} &7关闭详细模式。"
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &7正在回放 &f{player} &7最近 &e{seconds}秒 &7的移动。"
+replay-end: "{prefix} &f{player} &7的回放已结束。"
+replay-stopped: "{prefix} &7回放已停止。"
+replay-none: "{prefix} &c暂无 &f{player} &c的移动数据。"
+evidence-info: "{prefix} &f{player} &7的证据&8: &e{samples} &7条记录 (&e{seconds}秒&7)。"
+
+update-available: "{prefix} &eNovaGuard 有新版本: &fv{latest} &e(当前为 v{current})。 &7前往 &bgithub.com/Novastudio953/NovaGuard/releases &e下载"
+
+lang-set: "{prefix} &7消息语言已设为 &f{lang}&7。"
+lang-unknown: "{prefix} &c未知语言: &f{lang}&c。可用: &f{list}"
+lang-current: "{prefix} &7当前语言: &f{lang}&7。可用: &f{list}"
+
+discord-embed-title-punish: "玩家被处罚"
+discord-embed-title-wave: "封禁波已执行"
+discord-embed-title-queue: "已加入封禁波队列"
+discord-embed-player: "玩家"
+discord-embed-check: "检测项"
+discord-embed-vl: "VL"
+discord-embed-command: "命令"
+discord-embed-count: "玩家数"
+discord-embed-footer: "NovaGuard v{version}"

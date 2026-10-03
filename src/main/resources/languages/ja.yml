@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — 日本語 (ja)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cこれを使用する権限がありません。"
+player-only: "{prefix} &cこのコマンドはゲーム内でのみ使用できます。"
+player-not-online: "{prefix} &cそのプレイヤーはオンラインではありません。"
+reloaded: "{prefix} &a設定を正常にリロードしました。"
+usage: "{prefix} &7使い方: &f{usage}"
+
+unknown-check: "{prefix} &c不明なチェック: &f{check}&c。"
+check-toggled: "{prefix} &7チェック &f{check} &7は現在 {state} です。"
+state-enabled: "&a&l有効"
+state-disabled: "&c&l無効"
+
+vl-header: "{prefix} &7&f{player} &7の違反記録:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7はクリーンな記録です。"
+vl-cleared: "{prefix} &f{player} &7の違反をすべてクリアしました。"
+
+alerts-on: "{prefix} &7違反アラートを&a有効&7にしました。"
+alerts-off: "{prefix} &7違反アラートを&c無効&7にしました。"
+alert-format: "{prefix} &f{player} &7が &c{check} &8(&e{vl} VL&8) で検出"
+
+freeze-target-frozen: "{prefix} &cスタッフによってフリーズされました。&7動かずにログアウトしないでください。"
+freeze-target-unfrozen: "{prefix} &aフリーズが解除されました。"
+freeze-staff-frozen: "{prefix} &f{player} &7を&cフリーズ&7しました。"
+freeze-staff-unfrozen: "{prefix} &f{player} &7のフリーズを&a解除&7しました。"
+
+report-usage: "{prefix} &7使い方: &f/report <プレイヤー> <理由>"
+report-self: "{prefix} &c自分自身を報告することはできません。"
+report-filed: "{prefix} &a報告を送信しました。&7スタッフがまもなく確認します。"
+report-notify: "{prefix} &f{reporter} &7が &f{target} &7を報告&8: &f{reason}"
+report-dismissed: "{prefix} &7報告を却下しました。"
+
+wave-executed: "{prefix} &7BANウェーブを実行 — &c{count} &7人を削除しました。"
+wave-empty: "{prefix} &7BANウェーブのキューは空です。"
+wave-header: "{prefix} &7BANウェーブ待機中のプレイヤー:"
+wave-kick: "&cNovaGuard セキュリティ\n\n&7あなたのアカウントは審査対象としてマークされました。\n&7Discordでスタッフにお問い合わせください。"
+wave-discord: "**NovaGuard** — BANウェーブを実行、{count} 人を削除しました。"
+
+punishment-broadcast: "{prefix} &f{player} &7は &c{check} &7により削除されました。"
+punishment-discord: "**NovaGuard** — {player} に処罰: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} をBANウェーブに追加 ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cこのサーバーではVPN・プロキシ・ホスティングサービスの利用は禁止されています。"
+
+verbose-on: "{prefix} &f{player} &7の verbose を有効にしました — 検出がここに表示されます。"
+verbose-off: "{prefix} &f{player} &7の verbose を無効にしました。"
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &f{player} &7の直近 &e{seconds}秒 &7の動きを再生します。"
+replay-end: "{prefix} &f{player} &7の再生が終了しました。"
+replay-stopped: "{prefix} &7再生を停止しました。"
+replay-none: "{prefix} &f{player} &cの移動データはまだありません。"
+evidence-info: "{prefix} &f{player} &7の証拠&8: &e{samples} &7件 (&e{seconds}秒&7)。"
+
+update-available: "{prefix} &e新しい NovaGuard が利用可能です: &fv{latest} &e(現在 v{current})。 &7こちらから入手: &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7メッセージ言語を &f{lang} &7に設定しました。"
+lang-unknown: "{prefix} &c不明な言語: &f{lang}&c。利用可能: &f{list}"
+lang-current: "{prefix} &7現在の言語: &f{lang}&7。利用可能: &f{list}"
+
+discord-embed-title-punish: "プレイヤーが処罰されました"
+discord-embed-title-wave: "BANウェーブを実行しました"
+discord-embed-title-queue: "BANウェーブに追加"
+discord-embed-player: "プレイヤー"
+discord-embed-check: "チェック"
+discord-embed-vl: "VL"
+discord-embed-command: "コマンド"
+discord-embed-count: "人数"
+discord-embed-footer: "NovaGuard v{version}"

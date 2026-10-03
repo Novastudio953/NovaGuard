@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — Nederlands (nl)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cJe hebt hier geen toestemming voor."
+player-only: "{prefix} &cDit commando kan alleen in-game gebruikt worden."
+player-not-online: "{prefix} &cDie speler is niet online."
+reloaded: "{prefix} &aConfiguratie succesvol herladen."
+usage: "{prefix} &7Gebruik: &f{usage}"
+
+unknown-check: "{prefix} &cOnbekende check: &f{check}&c."
+check-toggled: "{prefix} &7Check &f{check} &7staat nu {state}."
+state-enabled: "&a&lAAN"
+state-disabled: "&c&lUIT"
+
+vl-header: "{prefix} &7Overtredingen van &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7heeft een schoon strafblad."
+vl-cleared: "{prefix} &7Alle overtredingen van &f{player} &7gewist."
+
+alerts-on: "{prefix} &7Overtredingsmeldingen &aaangezet&7."
+alerts-off: "{prefix} &7Overtredingsmeldingen &cuitgezet&7."
+alert-format: "{prefix} &f{player} &7geflagd voor &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &cJe bent bevroren door het team. &7Blijf stilstaan en log niet uit."
+freeze-target-unfrozen: "{prefix} &aJe bent ontdooid."
+freeze-staff-frozen: "{prefix} &f{player} &7is &cbevroren&7."
+freeze-staff-unfrozen: "{prefix} &f{player} &7is &aontdooid&7."
+
+report-usage: "{prefix} &7Gebruik: &f/report <speler> <reden>"
+report-self: "{prefix} &cJe kunt jezelf niet rapporteren."
+report-filed: "{prefix} &aMelding ingediend. &7Het team bekijkt deze binnenkort."
+report-notify: "{prefix} &f{reporter} &7rapporteerde &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7Melding afgewezen."
+
+wave-executed: "{prefix} &7Ban-golf uitgevoerd — &c{count} &7speler(s) verwijderd."
+wave-empty: "{prefix} &7De ban-golf wachtrij is leeg."
+wave-header: "{prefix} &7Spelers in de ban-golf wachtrij:"
+wave-kick: "&cNovaGuard Beveiliging\n\n&7Je account is gemarkeerd voor controle.\n&7Neem contact op met het team op onze Discord."
+wave-discord: "**NovaGuard** — ban-golf uitgevoerd, {count} speler(s) verwijderd."
+
+punishment-broadcast: "{prefix} &f{player} &7is verwijderd wegens &c{check}&7."
+punishment-discord: "**NovaGuard** — {player} gestraft: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} in wachtrij voor golf ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cVPN's, proxy's en hostingdiensten zijn niet toegestaan op deze server."
+
+verbose-on: "{prefix} &7Verbose aan voor &f{player}&7 — live detecties verschijnen hier."
+verbose-off: "{prefix} &7Verbose uit voor &f{player}&7."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &7Speelt laatste &e{seconds}s &7beweging van &f{player} &7af."
+replay-end: "{prefix} &7Replay van &f{player} &7klaar."
+replay-stopped: "{prefix} &7Replay gestopt."
+replay-none: "{prefix} &cNog geen bewegingsdata voor &f{player}&c."
+evidence-info: "{prefix} &7Bewijs voor &f{player}&8: &e{samples} &7samples (&e{seconds}s&7)."
+
+update-available: "{prefix} &eNieuwe NovaGuard-versie beschikbaar: &fv{latest} &e(jij hebt v{current}). &7Download op &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7Berichttaal ingesteld op &f{lang}&7."
+lang-unknown: "{prefix} &cOnbekende taal: &f{lang}&c. Beschikbaar: &f{list}"
+lang-current: "{prefix} &7Huidige taal: &f{lang}&7. Beschikbaar: &f{list}"
+
+discord-embed-title-punish: "Speler gestraft"
+discord-embed-title-wave: "Ban-golf uitgevoerd"
+discord-embed-title-queue: "In wachtrij voor golf"
+discord-embed-player: "Speler"
+discord-embed-check: "Check"
+discord-embed-vl: "VL"
+discord-embed-command: "Commando"
+discord-embed-count: "Spelers"
+discord-embed-footer: "NovaGuard v{version}"

@@ -25,6 +25,10 @@ class MoveListener(private val plugin: NovaGuard) : Listener {
             if (derp?.enabled == true && !d.isExempt(p)) derp.onMove(e, p, d)
             val afk = plugin.checks.get("afkmacro") as? com.novaguard.checks.MacroChecks.AfkMacro
             if (afk?.enabled == true && !d.isExempt(p)) afk.onMove(e, p, d)
+            // aimbot needs every look movement, not just positional ones
+            (plugin.checks.get("aimbot") as? com.novaguard.checks.AdvancedChecks.Aimbot)?.let {
+                if (it.enabled && !d.isExempt(p)) it.onMove(e, p, d)
+            }
             return
         }
         if (d.isExempt(p)) return

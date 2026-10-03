@@ -71,3 +71,19 @@ evidence-info: "{prefix} &7Evidencia de &f{player}&8: &e{samples} &7muestras (&e
 
 # ---------- update checker ----------
 update-available: "{prefix} &eHay una nueva versión de NovaGuard: &fv{latest} &e(tienes la v{current}). &7Descárgala en &bgithub.com/Novastudio953/NovaGuard/releases"
+
+# ---------- language ----------
+lang-set: "{prefix} &7Idioma de mensajes cambiado a &f{lang}&7."
+lang-unknown: "{prefix} &cIdioma desconocido: &f{lang}&c. Disponibles: &f{list}"
+lang-current: "{prefix} &7Idioma actual: &f{lang}&7. Disponibles: &f{list}"
+
+# ---------- discord embeds ----------
+discord-embed-title-punish: "Jugador castigado"
+discord-embed-title-wave: "Oleada de baneos ejecutada"
+discord-embed-title-queue: "En cola para la oleada"
+discord-embed-player: "Jugador"
+discord-embed-check: "Chequeo"
+discord-embed-vl: "VL"
+discord-embed-command: "Comando"
+discord-embed-count: "Jugadores"
+discord-embed-footer: "NovaGuard v{version}"

@@ -20,7 +20,7 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
             return true
         }
         if (args.isEmpty()) {
-            sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history|verbose|replay|evidence|config>"))
+            sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history|verbose|replay|evidence|config|lang>"))
             return true
         }
         when (args[0].lowercase()) {
@@ -150,7 +150,22 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
                 }
                 plugin.configGui.open(p)
             }
-            else -> sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history|verbose|replay|evidence|config>"))
+            "lang", "language" -> {
+                if (args.size < 2) {
+                    sender.sendMessage(msg("lang-current",
+                        "lang" to plugin.configs.language,
+                        "list" to plugin.configs.availableLanguages().joinToString(", ")))
+                    return true
+                }
+                if (plugin.configs.setLanguage(args[1])) {
+                    sender.sendMessage(msg("lang-set", "lang" to plugin.configs.language))
+                } else {
+                    sender.sendMessage(msg("lang-unknown",
+                        "lang" to args[1],
+                        "list" to plugin.configs.availableLanguages().joinToString(", ")))
+                }
+            }
+            else -> sender.sendMessage(msg("usage", "usage" to "/novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history|verbose|replay|evidence|config|lang>"))
         }
         return true
     }
@@ -159,10 +174,12 @@ class GuardCommand(private val plugin: NovaGuard) : CommandExecutor, TabComplete
         if (!sender.hasPermission("novaguard.admin")) return emptyList()
         if (args.size == 1) return listOf("reload", "list", "toggle", "vl", "vlreset",
             "alerts", "freeze", "wave", "wavelist", "reports", "history",
-            "verbose", "replay", "evidence", "config")
+            "verbose", "replay", "evidence", "config", "lang")
             .filter { it.startsWith(args[0].lowercase()) }
         if (args.size == 2 && args[0].equals("toggle", true))
             return plugin.checks.all.map { it.id }.filter { it.startsWith(args[1].lowercase()) }
+        if (args.size == 2 && args[0].equals("lang", true))
+            return plugin.configs.availableLanguages().filter { it.startsWith(args[1].lowercase()) }
         if (args.size == 2 && (args[0].equals("verbose", true) || args[0].equals("replay", true)
                     || args[0].equals("evidence", true)))
             return Bukkit.getOnlinePlayers().map { it.name }

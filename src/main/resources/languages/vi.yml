@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — Tiếng Việt (vi)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cBạn không có quyền dùng lệnh này."
+player-only: "{prefix} &cLệnh này chỉ dùng được trong game."
+player-not-online: "{prefix} &cNgười chơi đó hiện không online."
+reloaded: "{prefix} &aTải lại cấu hình thành công."
+usage: "{prefix} &7Cách dùng: &f{usage}"
+
+unknown-check: "{prefix} &cCheck không xác định: &f{check}&c."
+check-toggled: "{prefix} &7Check &f{check} &7hiện {state}."
+state-enabled: "&a&lBẬT"
+state-disabled: "&c&lTẮT"
+
+vl-header: "{prefix} &7Lịch sử vi phạm của &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7có lịch sử sạch."
+vl-cleared: "{prefix} &7Đã xóa mọi vi phạm của &f{player}&7."
+
+alerts-on: "{prefix} &7Đã &abật&7 cảnh báo vi phạm."
+alerts-off: "{prefix} &7Đã &ctắt&7 cảnh báo vi phạm."
+alert-format: "{prefix} &f{player} &7bị phát hiện &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &cBạn đã bị staff đóng băng. &7Hãy đứng yên và đừng thoát game."
+freeze-target-unfrozen: "{prefix} &aBạn đã được gỡ đóng băng."
+freeze-staff-frozen: "{prefix} &f{player} &7đã bị &cđóng băng&7."
+freeze-staff-unfrozen: "{prefix} &f{player} &7đã được &agỡ đóng băng&7."
+
+report-usage: "{prefix} &7Cách dùng: &f/report <người chơi> <lý do>"
+report-self: "{prefix} &cBạn không thể tố cáo chính mình."
+report-filed: "{prefix} &aĐã gửi tố cáo. &7Staff sẽ sớm xem xét."
+report-notify: "{prefix} &f{reporter} &7đã tố cáo &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7Đã từ chối tố cáo."
+
+wave-executed: "{prefix} &7Đã thực hiện đợt ban — &c{count} &7người chơi bị xóa."
+wave-empty: "{prefix} &7Hàng đợi đợt ban đang trống."
+wave-header: "{prefix} &7Người chơi chờ đợt ban:"
+wave-kick: "&cBảo mật NovaGuard\n\n&7Tài khoản của bạn đã bị đánh dấu để xem xét.\n&7Vui lòng liên hệ staff trên Discord của chúng tôi."
+wave-discord: "**NovaGuard** — đã thực hiện đợt ban, {count} người chơi bị xóa."
+
+punishment-broadcast: "{prefix} &f{player} &7đã bị xóa vì &c{check}&7."
+punishment-discord: "**NovaGuard** — {player} bị phạt: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} vào hàng đợi đợt ban ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cMáy chủ này không cho phép dùng VPN, proxy và dịch vụ hosting."
+
+verbose-on: "{prefix} &7Đã bật verbose cho &f{player}&7 — phát hiện trực tiếp sẽ hiện ở đây."
+verbose-off: "{prefix} &7Đã tắt verbose cho &f{player}&7."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &7Đang phát lại &e{seconds} &7giây di chuyển gần nhất của &f{player}&7."
+replay-end: "{prefix} &7Phát lại của &f{player} &7đã xong."
+replay-stopped: "{prefix} &7Đã dừng phát lại."
+replay-none: "{prefix} &cChưa có dữ liệu di chuyển của &f{player}&c."
+evidence-info: "{prefix} &7Bằng chứng cho &f{player}&8: &e{samples} &7mẫu (&e{seconds}s&7)."
+
+update-available: "{prefix} &eCó phiên bản NovaGuard mới: &fv{latest} &e(bạn đang dùng v{current}). &7Tải tại &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7Đã đặt ngôn ngữ tin nhắn thành &f{lang}&7."
+lang-unknown: "{prefix} &cNgôn ngữ không xác định: &f{lang}&c. Có sẵn: &f{list}"
+lang-current: "{prefix} &7Ngôn ngữ hiện tại: &f{lang}&7. Có sẵn: &f{list}"
+
+discord-embed-title-punish: "Người chơi bị phạt"
+discord-embed-title-wave: "Đã thực hiện đợt ban"
+discord-embed-title-queue: "Vào hàng đợi đợt ban"
+discord-embed-player: "Người chơi"
+discord-embed-check: "Check"
+discord-embed-vl: "VL"
+discord-embed-command: "Lệnh"
+discord-embed-count: "Người chơi"
+discord-embed-footer: "NovaGuard v{version}"

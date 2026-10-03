@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — Русский (ru)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cУ вас нет прав для использования этого."
+player-only: "{prefix} &cЭта команда доступна только в игре."
+player-not-online: "{prefix} &cЭтот игрок не в сети."
+reloaded: "{prefix} &aКонфигурация успешно перезагружена."
+usage: "{prefix} &7Использование: &f{usage}"
+
+unknown-check: "{prefix} &cНеизвестная проверка: &f{check}&c."
+check-toggled: "{prefix} &7Проверка &f{check} &7теперь {state}."
+state-enabled: "&a&lВКЛЮЧЕНА"
+state-disabled: "&c&lВЫКЛЮЧЕНА"
+
+vl-header: "{prefix} &7Журнал нарушений &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &7У &f{player} &7чистая история."
+vl-cleared: "{prefix} &7Нарушения &f{player} &7очищены."
+
+alerts-on: "{prefix} &7Оповещения о нарушениях &aвключены&7."
+alerts-off: "{prefix} &7Оповещения о нарушениях &cвыключены&7."
+alert-format: "{prefix} &f{player} &7замечен: &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &cВы заморожены администрацией. &7Не двигайтесь и не выходите из игры."
+freeze-target-unfrozen: "{prefix} &aВы разморожены."
+freeze-staff-frozen: "{prefix} &f{player} &7был &cзаморожен&7."
+freeze-staff-unfrozen: "{prefix} &f{player} &7был &aразморожен&7."
+
+report-usage: "{prefix} &7Использование: &f/report <игрок> <причина>"
+report-self: "{prefix} &cНельзя жаловаться на самого себя."
+report-filed: "{prefix} &aЖалоба отправлена. &7Администрация скоро её рассмотрит."
+report-notify: "{prefix} &f{reporter} &7пожаловался на &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7Жалоба отклонена."
+
+wave-executed: "{prefix} &7Волна банов выполнена — удалено игроков: &c{count}&7."
+wave-empty: "{prefix} &7Очередь волны банов пуста."
+wave-header: "{prefix} &7Игроки в очереди на волну:"
+wave-kick: "&cБезопасность NovaGuard\n\n&7Ваш аккаунт помечен для проверки.\n&7Свяжитесь с администрацией в нашем Discord."
+wave-discord: "**NovaGuard** — волна банов выполнена, удалено: {count}."
+
+punishment-broadcast: "{prefix} &f{player} &7удалён за &c{check}&7."
+punishment-discord: "**NovaGuard** — {player} наказан: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} в очереди на волну ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cVPN, прокси и хостинги запрещены на этом сервере."
+
+verbose-on: "{prefix} &7Verbose включён для &f{player}&7 — обнаружения появятся здесь."
+verbose-off: "{prefix} &7Verbose выключен для &f{player}&7."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &7Повтор последних &e{seconds}s &7движений &f{player}&7."
+replay-end: "{prefix} &7Повтор для &f{player} &7завершён."
+replay-stopped: "{prefix} &7Повтор остановлен."
+replay-none: "{prefix} &cПока нет данных о движении &f{player}&c."
+evidence-info: "{prefix} &7Доказательства по &f{player}&8: &e{samples} &7записей (&e{seconds}s&7)."
+
+update-available: "{prefix} &eДоступна новая версия NovaGuard: &fv{latest} &e(у вас v{current}). &7Скачать: &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7Язык сообщений: &f{lang}&7."
+lang-unknown: "{prefix} &cНеизвестный язык: &f{lang}&c. Доступны: &f{list}"
+lang-current: "{prefix} &7Текущий язык: &f{lang}&7. Доступны: &f{list}"
+
+discord-embed-title-punish: "Игрок наказан"
+discord-embed-title-wave: "Волна банов выполнена"
+discord-embed-title-queue: "В очереди на волну"
+discord-embed-player: "Игрок"
+discord-embed-check: "Проверка"
+discord-embed-vl: "VL"
+discord-embed-command: "Команда"
+discord-embed-count: "Игроков"
+discord-embed-footer: "NovaGuard v{version}"

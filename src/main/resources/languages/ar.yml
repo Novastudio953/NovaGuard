@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — العربية (ar)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cليس لديك إذن لاستخدام هذا."
+player-only: "{prefix} &cلا يمكن استخدام هذا الأمر إلا داخل اللعبة."
+player-not-online: "{prefix} &cهذا اللاعب غير متصل حالياً."
+reloaded: "{prefix} &aتمت إعادة تحميل الإعدادات بنجاح."
+usage: "{prefix} &7الاستخدام: &f{usage}"
+
+unknown-check: "{prefix} &cفحص غير معروف: &f{check}&c."
+check-toggled: "{prefix} &7الفحص &f{check} &7أصبح الآن {state}."
+state-enabled: "&a&lمُفعَّل"
+state-disabled: "&c&lمُعطَّل"
+
+vl-header: "{prefix} &7سجل مخالفات &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7سجله نظيف."
+vl-cleared: "{prefix} &7تم مسح جميع مخالفات &f{player}&7."
+
+alerts-on: "{prefix} &7تم &aتفعيل&7 تنبيهات المخالفات."
+alerts-off: "{prefix} &7تم &cتعطيل&7 تنبيهات المخالفات."
+alert-format: "{prefix} &f{player} &7تم رصده في &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &cتم تجميدك من قبل فريق العمل. &7ابقَ ساكناً ولا تسجّل الخروج."
+freeze-target-unfrozen: "{prefix} &aتم إلغاء تجميدك."
+freeze-staff-frozen: "{prefix} &7تم &cتجميد &f{player}&7."
+freeze-staff-unfrozen: "{prefix} &7تم &aإلغاء تجميد &f{player}&7."
+
+report-usage: "{prefix} &7الاستخدام: &f/report <لاعب> <سبب>"
+report-self: "{prefix} &cلا يمكنك الإبلاغ عن نفسك."
+report-filed: "{prefix} &aتم إرسال البلاغ. &7سيراجعه فريق العمل قريباً."
+report-notify: "{prefix} &f{reporter} &7أبلغ عن &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7تم رفض البلاغ."
+
+wave-executed: "{prefix} &7تم تنفيذ موجة الحظر — تمت إزالة &c{count} &7لاعب."
+wave-empty: "{prefix} &7قائمة انتظار موجة الحظر فارغة."
+wave-header: "{prefix} &7اللاعبون في انتظار الموجة:"
+wave-kick: "&cأمان NovaGuard\n\n&7تم وضع علامة على حسابك للمراجعة.\n&7تواصل مع فريق العمل على Discord."
+wave-discord: "**NovaGuard** — تم تنفيذ موجة الحظر، تمت إزالة {count} لاعب."
+
+punishment-broadcast: "{prefix} &7تمت إزالة &f{player} &7بسبب &c{check}&7."
+punishment-discord: "**NovaGuard** — تمت معاقبة {player}: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} في قائمة الموجة ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cلا يُسمح باستخدام VPN أو البروكسي أو خدمات الاستضافة في هذا السيرفر."
+
+verbose-on: "{prefix} &7تم تفعيل الوضع المفصّل لـ &f{player}&7 — ستظهر الاكتشافات هنا."
+verbose-off: "{prefix} &7تم تعطيل الوضع المفصّل لـ &f{player}&7."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &7إعادة تشغيل آخر &e{seconds} &7ثانية من حركة &f{player}&7."
+replay-end: "{prefix} &7انتهت إعادة تشغيل &f{player}&7."
+replay-stopped: "{prefix} &7تم إيقاف الإعادة."
+replay-none: "{prefix} &cلا توجد بيانات حركة لـ &f{player} &7بعد."
+evidence-info: "{prefix} &7الأدلة لـ &f{player}&8: &e{samples} &7عينة (&e{seconds} &7ثانية)."
+
+update-available: "{prefix} &eيتوفر إصدار جديد من NovaGuard: &fv{latest} &e(لديك v{current}). &7حمّله من &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7تم تعيين لغة الرسائل إلى &f{lang}&7."
+lang-unknown: "{prefix} &cلغة غير معروفة: &f{lang}&c. المتاح: &f{list}"
+lang-current: "{prefix} &7اللغة الحالية: &f{lang}&7. المتاح: &f{list}"
+
+discord-embed-title-punish: "تمت معاقبة لاعب"
+discord-embed-title-wave: "تم تنفيذ موجة الحظر"
+discord-embed-title-queue: "في قائمة الموجة"
+discord-embed-player: "اللاعب"
+discord-embed-check: "الفحص"
+discord-embed-vl: "VL"
+discord-embed-command: "الأمر"
+discord-embed-count: "اللاعبون"
+discord-embed-footer: "NovaGuard v{version}"

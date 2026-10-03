@@ -74,3 +74,19 @@ evidence-info: "{prefix} &7Evidence for &f{player}&8: &e{samples} &7samples (&e{
 
 # ---------- update checker ----------
 update-available: "{prefix} &eA new NovaGuard version is available: &fv{latest} &e(you run v{current}). &7Get it at &bgithub.com/Novastudio953/NovaGuard/releases"
+
+# ---------- language ----------
+lang-set: "{prefix} &7Message language set to &f{lang}&7."
+lang-unknown: "{prefix} &cUnknown language: &f{lang}&c. Available: &f{list}"
+lang-current: "{prefix} &7Current language: &f{lang}&7. Available: &f{list}"
+
+# ---------- discord embeds ----------
+discord-embed-title-punish: "Player Punished"
+discord-embed-title-wave: "Ban Wave Executed"
+discord-embed-title-queue: "Queued for Ban Wave"
+discord-embed-player: "Player"
+discord-embed-check: "Check"
+discord-embed-vl: "VL"
+discord-embed-command: "Command"
+discord-embed-count: "Players"
+discord-embed-footer: "NovaGuard v{version}"

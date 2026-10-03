@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — 한국어 (ko)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &c사용 권한이 없습니다."
+player-only: "{prefix} &c이 명령어는 게임 내에서만 사용할 수 있습니다."
+player-not-online: "{prefix} &c해당 플레이어가 온라인 상태가 아닙니다."
+reloaded: "{prefix} &a설정을 성공적으로 리로드했습니다."
+usage: "{prefix} &7사용법: &f{usage}"
+
+unknown-check: "{prefix} &c알 수 없는 체크: &f{check}&c."
+check-toggled: "{prefix} &7체크 &f{check}&7이(가) 현재 {state} 상태입니다."
+state-enabled: "&a&l활성화"
+state-disabled: "&c&l비활성화"
+
+vl-header: "{prefix} &7&f{player} &7의 위반 기록:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7님의 기록은 깨끗합니다."
+vl-cleared: "{prefix} &f{player} &7님의 모든 위반을 초기화했습니다."
+
+alerts-on: "{prefix} &7위반 알림이 &a활성화&7되었습니다."
+alerts-off: "{prefix} &7위반 알림이 &c비활성화&7되었습니다."
+alert-format: "{prefix} &f{player} &7님이 &c{check} &8(&e{vl} VL&8)에서 감지됨"
+
+freeze-target-frozen: "{prefix} &c스태프에 의해 프리즈되었습니다. &7가만히 계시고 로그아웃하지 마세요."
+freeze-target-unfrozen: "{prefix} &a프리즈가 해제되었습니다."
+freeze-staff-frozen: "{prefix} &f{player} &7님을 &c프리즈&7했습니다."
+freeze-staff-unfrozen: "{prefix} &f{player} &7님의 프리즈를 &a해제&7했습니다."
+
+report-usage: "{prefix} &7사용법: &f/report <플레이어> <사유>"
+report-self: "{prefix} &c자기 자신은 신고할 수 없습니다."
+report-filed: "{prefix} &a신고가 접수되었습니다. &7스태프가 곧 검토할 것입니다."
+report-notify: "{prefix} &f{reporter} &7님이 &f{target} &7님을 신고&8: &f{reason}"
+report-dismissed: "{prefix} &7신고를 기각했습니다."
+
+wave-executed: "{prefix} &7밴 웨이브 실행 — &c{count} &7명 제거됨."
+wave-empty: "{prefix} &7밴 웨이브 대기열이 비어 있습니다."
+wave-header: "{prefix} &7밴 웨이브 대기 중인 플레이어:"
+wave-kick: "&cNovaGuard 보안\n\n&7계정이 검토 대상으로 표시되었습니다.\n&7Discord에서 스태프에게 문의하세요."
+wave-discord: "**NovaGuard** — 밴 웨이브 실행, {count}명 제거됨."
+
+punishment-broadcast: "{prefix} &f{player} &7님이 &c{check}&7(으)로 인해 제거되었습니다."
+punishment-discord: "**NovaGuard** — {player} 처벌: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} 밴 웨이브 대기열 추가 ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &c이 서버에서는 VPN, 프록시, 호스팅 서비스가 허용되지 않습니다."
+
+verbose-on: "{prefix} &f{player} &7님의 verbose 활성화 — 실시간 감지가 여기에 표시됩니다."
+verbose-off: "{prefix} &f{player} &7님의 verbose 비활성화."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &f{player} &7님의 최근 &e{seconds}초 &7움직임을 재생합니다."
+replay-end: "{prefix} &f{player} &7님의 재생이 종료되었습니다."
+replay-stopped: "{prefix} &7재생을 중지했습니다."
+replay-none: "{prefix} &f{player} &7님의 이동 데이터가 아직 없습니다."
+evidence-info: "{prefix} &f{player} &7님의 증거&8: &e{samples} &7개 (&e{seconds}초&7)."
+
+update-available: "{prefix} &e새 NovaGuard 버전 사용 가능: &fv{latest} &e(현재 v{current}). &7다운로드: &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7메시지 언어가 &f{lang}&7(으)로 설정되었습니다."
+lang-unknown: "{prefix} &c알 수 없는 언어: &f{lang}&c. 사용 가능: &f{list}"
+lang-current: "{prefix} &7현재 언어: &f{lang}&7. 사용 가능: &f{list}"
+
+discord-embed-title-punish: "플레이어 처벌됨"
+discord-embed-title-wave: "밴 웨이브 실행됨"
+discord-embed-title-queue: "밴 웨이브 대기열 추가"
+discord-embed-player: "플레이어"
+discord-embed-check: "체크"
+discord-embed-vl: "VL"
+discord-embed-command: "명령어"
+discord-embed-count: "인원"
+discord-embed-footer: "NovaGuard v{version}"

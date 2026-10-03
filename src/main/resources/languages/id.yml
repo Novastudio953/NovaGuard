@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — Bahasa Indonesia (id)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cKamu tidak punya izin untuk ini."
+player-only: "{prefix} &cPerintah ini hanya bisa dipakai di dalam game."
+player-not-online: "{prefix} &cPemain itu sedang tidak online."
+reloaded: "{prefix} &aKonfigurasi berhasil dimuat ulang."
+usage: "{prefix} &7Cara pakai: &f{usage}"
+
+unknown-check: "{prefix} &cCheck tidak dikenal: &f{check}&c."
+check-toggled: "{prefix} &7Check &f{check} &7sekarang {state}."
+state-enabled: "&a&lAKTIF"
+state-disabled: "&c&lMATI"
+
+vl-header: "{prefix} &7Catatan pelanggaran &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7punya catatan bersih."
+vl-cleared: "{prefix} &7Semua pelanggaran &f{player} &7dihapus."
+
+alerts-on: "{prefix} &7Peringatan pelanggaran &adinyalakan&7."
+alerts-off: "{prefix} &7Peringatan pelanggaran &cdimatikan&7."
+alert-format: "{prefix} &f{player} &7tertangkap &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &cKamu dibekukan oleh staff. &7Tetap diam dan jangan logout."
+freeze-target-unfrozen: "{prefix} &aKamu sudah tidak dibekukan."
+freeze-staff-frozen: "{prefix} &f{player} &7telah &cdibekukan&7."
+freeze-staff-unfrozen: "{prefix} &f{player} &7sudah &atidak dibekukan&7."
+
+report-usage: "{prefix} &7Cara pakai: &f/report <pemain> <alasan>"
+report-self: "{prefix} &cKamu tidak bisa melaporkan dirimu sendiri."
+report-filed: "{prefix} &aLaporan terkirim. &7Staff akan segera meninjaunya."
+report-notify: "{prefix} &f{reporter} &7melaporkan &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7Laporan ditolak."
+
+wave-executed: "{prefix} &7Ban wave dijalankan — &c{count} &7pemain dihapus."
+wave-empty: "{prefix} &7Antrean ban wave sedang kosong."
+wave-header: "{prefix} &7Pemain menunggu ban wave:"
+wave-kick: "&cKeamanan NovaGuard\n\n&7Akunmu ditandai untuk ditinjau.\n&7Hubungi staff di Discord kami."
+wave-discord: "**NovaGuard** — ban wave dijalankan, {count} pemain dihapus."
+
+punishment-broadcast: "{prefix} &f{player} &7dihapus karena &c{check}&7."
+punishment-discord: "**NovaGuard** — {player} dihukum: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} masuk antrean wave ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cVPN, proxy, dan layanan hosting tidak diizinkan di server ini."
+
+verbose-on: "{prefix} &7Verbose aktif untuk &f{player}&7 — deteksi live akan muncul di sini."
+verbose-off: "{prefix} &7Verbose mati untuk &f{player}&7."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &7Memutar ulang &e{seconds} &7detik gerakan terakhir &f{player}&7."
+replay-end: "{prefix} &7Replay &f{player} &7selesai."
+replay-stopped: "{prefix} &7Replay dihentikan."
+replay-none: "{prefix} &cBelum ada data gerakan untuk &f{player}&c."
+evidence-info: "{prefix} &7Bukti untuk &f{player}&8: &e{samples} &7sampel (&e{seconds} &7detik)."
+
+update-available: "{prefix} &eNovaGuard versi baru tersedia: &fv{latest} &e(kamu pakai v{current}). &7Unduh di &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7Bahasa pesan diatur ke &f{lang}&7."
+lang-unknown: "{prefix} &cBahasa tidak dikenal: &f{lang}&c. Tersedia: &f{list}"
+lang-current: "{prefix} &7Bahasa saat ini: &f{lang}&7. Tersedia: &f{list}"
+
+discord-embed-title-punish: "Pemain Dihukum"
+discord-embed-title-wave: "Ban Wave Dijalankan"
+discord-embed-title-queue: "Masuk Antrean Wave"
+discord-embed-player: "Pemain"
+discord-embed-check: "Check"
+discord-embed-vl: "VL"
+discord-embed-command: "Perintah"
+discord-embed-count: "Pemain"
+discord-embed-footer: "NovaGuard v{version}"

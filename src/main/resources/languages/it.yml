@@ -1,0 +1,74 @@
+# ============================================================
+# NovaGuard — Italiano (it)
+# ============================================================
+
+prefix: "&8[&b&lNova&3&lGuard&8]"
+
+no-permission: "{prefix} &cNon hai il permesso di usarlo."
+player-only: "{prefix} &cQuesto comando si usa solo in gioco."
+player-not-online: "{prefix} &cQuel giocatore non è online."
+reloaded: "{prefix} &aConfigurazione ricaricata con successo."
+usage: "{prefix} &7Uso: &f{usage}"
+
+unknown-check: "{prefix} &cControllo sconosciuto: &f{check}&c."
+check-toggled: "{prefix} &7Il controllo &f{check} &7ora è {state}."
+state-enabled: "&a&lATTIVO"
+state-disabled: "&c&lDISATTIVO"
+
+vl-header: "{prefix} &7Registro violazioni di &f{player}&7:"
+vl-line: "&8▸ &f{check} &8— &e{vl} VL"
+vl-empty: "{prefix} &f{player} &7ha la fedina pulita."
+vl-cleared: "{prefix} &7Violazioni cancellate per &f{player}&7."
+
+alerts-on: "{prefix} &7Avvisi di violazione &aattivati&7."
+alerts-off: "{prefix} &7Avvisi di violazione &cdisattivati&7."
+alert-format: "{prefix} &f{player} &7rilevato per &c{check} &8(&e{vl} VL&8)"
+
+freeze-target-frozen: "{prefix} &cSei stato congelato dallo staff. &7Resta fermo e non disconnetterti."
+freeze-target-unfrozen: "{prefix} &aSei stato scongelato."
+freeze-staff-frozen: "{prefix} &f{player} &7è stato &ccongelato&7."
+freeze-staff-unfrozen: "{prefix} &f{player} &7è stato &ascongelato&7."
+
+report-usage: "{prefix} &7Uso: &f/report <giocatore> <motivo>"
+report-self: "{prefix} &cNon puoi segnalare te stesso."
+report-filed: "{prefix} &aSegnalazione inviata. &7Lo staff la esaminerà a breve."
+report-notify: "{prefix} &f{reporter} &7ha segnalato &f{target}&8: &f{reason}"
+report-dismissed: "{prefix} &7Segnalazione respinta."
+
+wave-executed: "{prefix} &7Ondata di ban eseguita — &c{count} &7giocatori rimossi."
+wave-empty: "{prefix} &7La coda dell'ondata di ban è vuota."
+wave-header: "{prefix} &7Giocatori in attesa dell'ondata:"
+wave-kick: "&cSicurezza NovaGuard\n\n&7Il tuo account è stato segnalato per revisione.\n&7Contatta lo staff sul nostro Discord."
+wave-discord: "**NovaGuard** — ondata di ban eseguita, {count} giocatori rimossi."
+
+punishment-broadcast: "{prefix} &f{player} &7è stato rimosso per &c{check}&7."
+punishment-discord: "**NovaGuard** — {player} punito: `{command}`"
+wave-add-discord: "**NovaGuard** — {player} in coda per l'ondata ({check}, {vl} VL)"
+
+vpn-kick: "{prefix} &cVPN, proxy e servizi di hosting non sono ammessi su questo server."
+
+verbose-on: "{prefix} &7Verbose attivo per &f{player}&7 — i rilevamenti appariranno qui."
+verbose-off: "{prefix} &7Verbose disattivo per &f{player}&7."
+verbose-line: "&8[&3VERBOSE&8] &f{player} &8| &c{check} &8| &e{vl} VL &8| &7{info} &8| &7{ping}ms"
+
+replay-start: "{prefix} &7Riproduco gli ultimi &e{seconds}s &7di movimento di &f{player}&7."
+replay-end: "{prefix} &7Riproduzione di &f{player} &7terminata."
+replay-stopped: "{prefix} &7Riproduzione fermata."
+replay-none: "{prefix} &cNessun dato di movimento per &f{player} &7ancora."
+evidence-info: "{prefix} &7Prove per &f{player}&8: &e{samples} &7campioni (&e{seconds}s&7)."
+
+update-available: "{prefix} &eNuova versione di NovaGuard disponibile: &fv{latest} &e(hai la v{current}). &7Scaricala da &bgithub.com/Novastudio953/NovaGuard/releases"
+
+lang-set: "{prefix} &7Lingua dei messaggi impostata su &f{lang}&7."
+lang-unknown: "{prefix} &cLingua sconosciuta: &f{lang}&c. Disponibili: &f{list}"
+lang-current: "{prefix} &7Lingua attuale: &f{lang}&7. Disponibili: &f{list}"
+
+discord-embed-title-punish: "Giocatore punito"
+discord-embed-title-wave: "Ondata di ban eseguita"
+discord-embed-title-queue: "In coda per l'ondata"
+discord-embed-player: "Giocatore"
+discord-embed-check: "Controllo"
+discord-embed-vl: "VL"
+discord-embed-command: "Comando"
+discord-embed-count: "Giocatori"
+discord-embed-footer: "NovaGuard v{version}"

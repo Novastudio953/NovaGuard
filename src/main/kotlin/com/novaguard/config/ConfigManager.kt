@@ -51,8 +51,21 @@ class ConfigManager(private val plugin: NovaGuard) {
         }
     }
 
-    /** All bundled language codes. */
-    fun availableLanguages(): List<String> = listOf("en", "es", "tl")
+    /** All bundled language codes (en = default, built into messages.yml). */
+    fun availableLanguages(): List<String> = listOf(
+        "en", "es", "tl", "fr", "de", "pt", "ru", "zh", "ja", "ko",
+        "ar", "hi", "id", "it", "nl", "pl", "tr", "uk", "vi", "th", "ms"
+    )
+
+    /** Switch language at runtime and persist to config.yml. */
+    fun setLanguage(code: String): Boolean {
+        val c = code.lowercase()
+        if (c !in availableLanguages()) return false
+        plugin.config.set("settings.language", c)
+        plugin.saveConfig()
+        loadLanguage()
+        return true
+    }
 
     private fun loadFile(name: String): FileConfiguration {
         val file = File(plugin.dataFolder, name)
