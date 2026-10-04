@@ -5,6 +5,7 @@ import com.novaguard.api.NovaGuardAPI
 import com.novaguard.check.CheckManager
 import com.novaguard.checks.ExtraChecks
 import com.novaguard.command.GuardCommand
+import com.novaguard.command.BrigadierBridge
 import com.novaguard.command.ReportCommand
 import com.novaguard.command.SusCommand
 import com.novaguard.config.ConfigManager
@@ -99,15 +100,12 @@ class NovaGuard : JavaPlugin() {
         server.pluginManager.registerEvents(ExtraListener(this), this)
         server.pluginManager.registerEvents(updater, this)
 
-        val cmd = GuardCommand(this)
-        getCommand("novaguard")?.setExecutor(cmd)
-        getCommand("novaguard")?.tabCompleter = cmd
+        val guard = GuardCommand(this)
         val report = ReportCommand(this)
-        getCommand("report")?.setExecutor(report)
-        getCommand("report")?.tabCompleter = report
         val sus = SusCommand(this)
-        getCommand("sus")?.setExecutor(sus)
-        getCommand("sus")?.tabCompleter = sus
+        // Paper 26.x: commands go through the COMMANDS lifecycle event,
+        // getCommand() throws on paper plugins during startup
+        BrigadierBridge(this, guard, report, sus).register()
 
         // client brand detection (minecraft:brand channel)
         server.messenger.registerIncomingPluginChannel(this, "minecraft:brand",

@@ -1,25 +1,13 @@
 name: NovaGuard
-version: 1.8.0
+version: 1.8.1
 main: com.novaguard.NovaGuard
 api-version: '1.21'
 author: Nova Studio
 description: Original premium anti-cheat with 50 toggleable checks.
 website: https://github.com/Novastudio953/NovaGuard
 softdepend: [floodgate, Geyser-Spigot]
-commands:
-  novaguard:
-    description: NovaGuard admin command
-    usage: /novaguard <reload|list|toggle|vl|vlreset|alerts|freeze|wave|wavelist|reports|history|verbose|replay|evidence|config>
-    aliases: [ng, guard]
-    permission: novaguard.admin
-  report:
-    description: Report a suspected cheater to staff
-    usage: /report <player> <reason>
-  sus:
-    description: Open the suspects GUI with all flagged players
-    usage: /sus
-    aliases: [suspects]
-    permission: novaguard.sus
+# NOTE: commands are registered in code (BrigadierBridge) — Paper 26.x
+# paper plugins do not support YAML command declarations.
 permissions:
   novaguard.admin:
     description: Full NovaGuard admin access

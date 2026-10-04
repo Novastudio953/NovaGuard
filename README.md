@@ -2,7 +2,7 @@
 
 A high-performance anti-cheat for **Paper 1.21 through the latest release** servers, crafted by **Nova Studio**.
 
-[![Version](https://img.shields.io/badge/version-1.8.0-blue)](https://github.com/Novastudio953/NovaGuard/releases)
+[![Version](https://img.shields.io/badge/version-1.8.1-blue)](https://github.com/Novastudio953/NovaGuard/releases)
 [![Paper](https://img.shields.io/badge/paper-1.21%E2%80%93latest-orange)](https://papermc.io)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.x-purple)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -108,7 +108,7 @@ All files generate with sane defaults on first run.
 ### To run the plugin (server owners)
 | Download | Where to get it | Notes |
 |---|---|---|
-| `NovaGuard-1.8.0.jar` | [Releases page](https://github.com/Novastudio953/NovaGuard/releases) — always grab the version marked **Latest** | Drop into `plugins/` and restart |
+| `NovaGuard-1.8.1.jar` | [Releases page](https://github.com/Novastudio953/NovaGuard/releases) — always grab the version marked **Latest** | Drop into `plugins/` and restart |
 | Paper 1.21+ | [papermc.io](https://papermc.io/downloads/paper) | 1.21 through the latest 26.x builds work |
 | Java 21 | [Adoptium](https://adoptium.net/temurin/releases/?version=21) | The server must run on Java 21 |
 
@@ -129,7 +129,7 @@ No database, no extra plugins, no paid dependencies — everything else the plug
 
 ## Installation
 
-1. Download the latest `NovaGuard-1.8.0.jar` from the releases page.
+1. Download the latest `NovaGuard-1.8.1.jar` from the releases page.
 2. Drop it into your server's `plugins/` folder.
 3. Restart the server. Configuration files generate automatically.
 
@@ -149,7 +149,7 @@ kotlinc -no-stdlib -no-reflect \
 
 # add resources, shade the Kotlin stdlib, and package
 cp -r src/main/resources/* build/classes/
-jar cf NovaGuard-1.8.0.jar -C build/classes .
+jar cf NovaGuard-1.8.1.jar -C build/classes .
 ```
 
 ---
